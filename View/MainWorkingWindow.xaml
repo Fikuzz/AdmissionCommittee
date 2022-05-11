@@ -1,0 +1,1183 @@
+﻿<Window x:Class="PriyemnayaKomissiya.View.MainWorkingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Приемная комиссия «Полоцкий государственный экономический колледж»" Height="1000" Width="1122"
+        x:Name="MainWorkingWindowForm" Loaded="MainWorkingWindow_Loaded" Background="#FFF6F7FA" SizeChanged="MainWorkingWindowForm_SizeChanged" Closed="MainWorkingWindowForm_Closed" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" MinWidth="1000">
+    <Grid Background="#0894A1BB">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="80"/>
+            <RowDefinition Height="83" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="271"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--#region Верхняя панель-->
+        <Border BorderBrush="Black" Background="White" BorderThickness="0" Grid.ColumnSpan="2" CornerRadius="0,0,20,20" Height="80" VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="128"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="320"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image Source="pack://application:,,,/Resources/calendar.png" Width="32" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="0,24"/>
+                <Label x:Name="lDate" Content="Понедельник, 20 июля" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" Grid.Row="0" Grid.Column="1" Margin="40,26,0,26" VerticalAlignment="Center" Height="28"/>
+                <Canvas Grid.Column="2">
+                    <Ellipse Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Width="40" Height="40" Canvas.Top="18">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="pack://application:,,,/Resources/hello-reviva.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock x:Name="lUser_FIO" Text="Елена Александровна" FontSize="14"  FontFamily="{StaticResource Montserrat-Regular}" Grid.Row="0" Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Right" Width="256" Height="16" Canvas.Left="64" Canvas.Top="28"/>
+                    <Canvas.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Выйти" Click="MenuItem_Exit"/>
+                        </ContextMenu>
+                    </Canvas.ContextMenu>
+                </Canvas>
+            </Grid>
+        </Border>
+
+        <!--#endregion-->
+        <!--#region TabControl | Рабочая область-->
+        <Grid Grid.ColumnSpan="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="136"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label VerticalAlignment="Top" HorizontalAlignment="Center" Content="Специальности" FontFamily="{StaticResource Montserrat-Regular}" FontSize="16" RenderTransformOrigin="0.637,1.883" MinWidth="125" MinHeight="30" Grid.Row="1" Height="30" Width="136" Grid.Column="1"/>
+            <TabControl x:Name="TabControl" SelectedIndex="0" Style="{DynamicResource TabControlStyle}" Grid.Column="2" Margin="0,0,0,-30" Grid.Row="1" MinWidth="0.2" >
+            </TabControl>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Планы приема-->
+        <Grid x:Name="MainGrid" Margin="10,32,0,0" Visibility="Visible" Grid.Column="1" Grid.Row="2">
+            <Label Content="ПЛАН ПРИЁМА 2021" HorizontalAlignment="Left" Margin="39,13,0,0" VerticalAlignment="Top" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Foreground="#FF76829B" Height="26" Width="382"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,44,0,0">
+                <Grid Grid.Column="2" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="240"/>
+                        <RowDefinition Height="240"/>
+                        <RowDefinition Height="240"/>
+                        <RowDefinition Height="240"/>
+                        <RowDefinition Height="240"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="382*" MinWidth="340" MaxWidth="420"/>
+                        <ColumnDefinition Width="382*" MinWidth="340" MaxWidth="420"/>
+                        <ColumnDefinition Width="382*" MinWidth="340" MaxWidth="420"/>
+                        <ColumnDefinition Width="382*" MinWidth="340" MaxWidth="420"/>
+                    </Grid.ColumnDefinitions>
+                    <Canvas Style="{DynamicResource PlanPriema}" Tag="1" x:Name="BlockPlana1" MouseDown="Canvas_MouseDown" Margin="1,0,77,32" Grid.Row="1" Grid.Column="1">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF1A95B0"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" >
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Name="AdmissionPlan_Text1" Text="" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}"/>
+                        <TextBlock Name="AdmissionPlan_Text2" TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Name="AdmissionPlan_Count" Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana2" Margin="0,0,77,32" Grid.Column="2" Grid.Row="1" MouseDown="Canvas_MouseDown">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF44A6D4"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}"/>
+                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana3" Margin="1,0,75,32" Grid.Row="1" Grid.Column="3" MouseDown="Canvas_MouseDown">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FFFF576B"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
+                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana4" MouseDown="Canvas_MouseDown" Margin="0,0,77,32" Grid.Row="1" Grid.Column="4" >
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF1E8D4B"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
+                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana5" Margin="0,0,77,32" Grid.Column="1" Grid.Row="2" MouseDown="Canvas_MouseDown">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FFDC8833"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
+                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana6" Margin="1,0,75,32" Grid.Row="2" Grid.Column="2" MouseDown="Canvas_MouseDown">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF5D4FEC"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
+                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana7" MouseDown="Canvas_MouseDown" Margin="0,0,77,32" Grid.Row="2" Grid.Column="3">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF81176E"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
+                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana8" Margin="0,0,77,32" Grid.Column="4" Grid.Row="2" MouseDown="Canvas_MouseDown">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF3A3A3A"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/PriyemnayaKomissiya;component/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
+                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana9" Margin="1,0,75,32" Grid.Row="3" Grid.Column="1" MouseDown="Canvas_MouseDown">
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF6C4646"/>
+                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" Width="241" />
+                        <TextBlock TextWrapping="Wrap" Text="" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
+                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                        <TextBlock Text="" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                    </Canvas>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <!--#endregion--> 
+        <!--#region форма таблицы плана приема -->
+        <Grid Name="GridDataTable" Visibility="Hidden" Grid.ColumnSpan="2" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="76"/>
+                <RowDefinition/>
+                <RowDefinition Height="27"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="151*" MinWidth="50"/>
+                <ColumnDefinition Width="766*" MinWidth="440"/>
+                <ColumnDefinition Width="624*"/>
+                <ColumnDefinition Width="151*" MinWidth="50"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="White" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" >
+                <Label Name="LabelFormaObrazovaniya" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Grid.Row="1" Grid.Column="1" Canvas.Top="23" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,21,0,21" Height="32" MinHeight="32"/>
+                <TextBlock x:Name="GridCountWrite" MinHeight="14" Text="24" FontFamily="{StaticResource Montserrat-Regular}" FontSize="12" Background="#FFE4E3E3" VerticalAlignment="Center" TextAlignment="Center" MaxWidth="30" Width="24" Margin="0,29,0,31" Foreground="#FF747474"/>
+            </StackPanel>
+            <DataGrid x:Name="dataDridAbiturients" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{DynamicResource dgAbbiturients}" PreviewKeyDown="Table_PressDelete" MouseDoubleClick="DataDridAbiturients_MouseDoubleClick" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" Visibility="Hidden" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="№" Width="5*" Binding="{Binding Num}"/>
+                    <DataGridTextColumn x:Name="fio" Header="ФИО АБИТУИЕНТА" Width="25*" Binding="{Binding FIO}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemyBold}"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Lgoti}" Value="">
+                                        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="ЛЬГОТЫ" Width="10*" Binding="{Binding Lgoti}"/>
+                    <DataGridTextColumn Header="СТАТЬИ" Width="10*" Binding="{Binding Stati}"/>
+                    <DataGridTextColumn Header="ВЛАДЕЛЕЦ" Width="10*" Binding="{Binding Vladelec}"/>
+                    <DataGridTextColumn Header="ДАТА" Width="15*" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="СТАТУС" Width="15*" Binding="{Binding Status}" ElementStyle="{DynamicResource statusCell}"/>
+                    <DataGridTemplateColumn Header="ДЕЙСТВИЕ" Width="15*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="/PriyemnayaKomissiya;component/Resources/photograph.png" MouseUp="Image_MouseUp"/>
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/pencil-alt.png" MouseUp="Image_MouseUp_1" />
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/dots-horizontal.png" MouseUp="Image_MouseUp_2">
+                                        <Image.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Зачислить" Click="Abiturient_SetStatus" Tag="0,1"/>
+                                                <MenuItem Header="Принято" Click="Abiturient_SetStatus" Tag="0,0"/>
+                                                <Separator/>
+                                                <MenuItem Header="Удалить" Click="Abiturient_Delete"/>
+                                            </ContextMenu>
+                                        </Image.ContextMenu>
+                                    </Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal"  Grid.Column="2" Grid.Row="1" Margin="0,0,20,0" HorizontalAlignment="Right" Width="594">
+                <TextBox x:Name="textBoxSearch" Width="207" Margin="220,19,0,19" Style="{DynamicResource textboxSearch}" Text="" Background="#2676829B" Foreground="#FF76829B" FontSize="14" TextChanged="TextBoxSearch_TextChanged"/>
+                <Button Content="Создать" Width="106" Height="36" Style="{DynamicResource ButtonStyleObshchiyRED}" FontFamily="{StaticResource Montserrat-SemyBold}" Margin="10,19" Click="Button_Click"/>
+                <Border Width="33" Height="33" Background="{StaticResource FF576B}" CornerRadius="10">
+                    <Image Source="/PriyemnayaKomissiya;component/Resources/Layer 2.png" Margin="5,5,5,0" RenderTransformOrigin="0.478,0.522" Height="23" VerticalAlignment="Top" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Фильтры-->
+        <Grid x:Name="Filter" Visibility="Visible" Background="Transparent" Grid.Row="2" Margin="0,37,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="83"/>
+                <ColumnDefinition Width="181"/>
+                <ColumnDefinition Width="77*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="ФИНАНСИРОВАНИЕ" Grid.Row="0" Foreground="#76829B" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" HorizontalAlignment="Left" Margin="82,9,0,0" VerticalAlignment="Top" Height="31" Width="181" Grid.ColumnSpan="2"/>
+            <CheckBox x:Name="CBFinBudjet" Content="Бюджет" IsChecked="True" Foreground="#343E5A" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" HorizontalAlignment="Left" Margin="82,54,0,0" VerticalAlignment="Top" Style="{DynamicResource CheckBoxStyleObshchiy}" Height="19" Width="181" Click="Filter_Click" Grid.ColumnSpan="2"/>
+            <CheckBox x:Name="CBFinHozrach" Content="Хозрасчет" IsChecked="True" Foreground="#343E5A" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" HorizontalAlignment="Left" Margin="82,81,0,0" VerticalAlignment="Top" Style="{DynamicResource CheckBoxStyleObshchiy}" Height="19" Width="181" Click="Filter_Click" Grid.ColumnSpan="2"/>
+            <Label Content="ОБРАЗОВАНИЕ" Foreground="#76829B" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" HorizontalAlignment="Left" Margin="82,123,0,0" VerticalAlignment="Top" Height="30" Width="181" Grid.ColumnSpan="2"/>
+            <CheckBox x:Name="CBObrBaz" Content="После 9 классов" IsChecked="True" Foreground="#343E5A" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" HorizontalAlignment="Left" Margin="82,165,0,0" VerticalAlignment="Top" Style="{DynamicResource CheckBoxStyleObshchiy}" Height="19" Width="181" Click="Filter_Click" Grid.ColumnSpan="2"/>
+            <CheckBox x:Name="CBObrsred" Content="После 11 классов" IsChecked="True" Foreground="#343E5A" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" HorizontalAlignment="Left" Margin="82,194,0,0" VerticalAlignment="Top" Style="{DynamicResource CheckBoxStyleObshchiy}" Height="19" Width="181" Click="Filter_Click" Grid.ColumnSpan="2"/>
+            <Label Content="ФОРМА ОБУЧЕНИЯ" Foreground="#76829B" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" HorizontalAlignment="Left" Margin="82,235,0,0" VerticalAlignment="Top" Height="31" Width="181" Grid.ColumnSpan="2"/>
+            <CheckBox x:Name="CBFormDnev" Content="Дневная" IsChecked="True" Grid.Column="1" Foreground="#343E5A" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" HorizontalAlignment="Left" Margin="0,279,0,0" VerticalAlignment="Top" Style="{DynamicResource CheckBoxStyleObshchiy}" Height="19" Width="181" Click="Filter_Click"/>
+            <CheckBox x:Name="CBformZaoch" Content="Заочная" IsChecked="True" Grid.Column="1" Foreground="#343E5A" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" HorizontalAlignment="Left" Margin="0,307,0,0" VerticalAlignment="Top" Style="{DynamicResource CheckBoxStyleObshchiy}" Height="19" Width="181" BorderBrush="#FF707070" BorderThickness="0" Click="Filter_Click"/>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Просмотра информации-->
+        <Grid x:Name="GridInfo" Visibility="Hidden" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,10" Background="#FFF3F4F8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="95"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="10" Background="#FF1A95B0" Margin="98,22,89,22">
+                <Grid Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="InfoFIO" Text="Andrey" Margin="15,10,15,0" FontSize="24" FontFamily="{StaticResource Montserrat-SemyBold}"  Foreground="White" VerticalAlignment="Top" Height="37"/>
+                        <Border Background="#4CFFFFFF" Margin="10" CornerRadius="15" Width="120">
+                            <TextBlock x:Name="InfoShow_Status" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Принято" Margin="0,4" Width="120" TextAlignment="Center" Foreground="White" FontSize="16" Height="23" />
+                        </Border>
+                    </StackPanel>
+                    <Image Source="/PriyemnayaKomissiya;component/Resources/Layer 2.png" Margin="25,0,103,0" Width="23" Grid.Column="1" MouseLeftButtonDown="Image_BackToAbiturients"/>
+                    <Image Source="/PriyemnayaKomissiya;component/Resources/pencil-alt (1).png" Margin="60,0,67,0" Width="23" Grid.Column="1" RenderTransformOrigin="0.5,0.775" MouseLeftButtonDown="Image_MouseUp_1"/>
+                    <Image Source="/PriyemnayaKomissiya;component/Resources/dots-horizontal (1).png" Margin="95,0,33,0" Width="23" Grid.Column="1" MouseLeftButtonDown="Image_MouseUp_2">
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Зачислить" Click="Abiturient_SetStatus" Tag="0,1"/>
+                                <MenuItem Header="Принято" Click="Abiturient_SetStatus" Tag="0,0"/>
+                                <Separator/>
+                                <MenuItem Header="Удалить" Click="Abiturient_Delete"/>
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                    </Image>
+                </Grid>
+            </Border>
+            <ScrollViewer Grid.Row="1" Margin="0,0,10,0">
+                <Grid VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="2" MinHeight="684" Height="642">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="159"/>
+                        <RowDefinition x:Name="RowInfoWork" Height="78"/>
+                        <RowDefinition Height="138"/>
+                        <RowDefinition Height="436"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="104*"/>
+                        <ColumnDefinition Width="581*"/>
+                        <ColumnDefinition Width="688*"/>
+                        <ColumnDefinition Width="42*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Margin="0,1,20,5" Grid.Row="1" MinHeight="150">
+                        <TextBlock Text="ОСНОВНЫЕ ДАННЫЕ" Style="{DynamicResource TextBlockzagolovok}" Margin="10,10,10,4" Height="16"/>
+                        <Line X1="0" Y1="0" X2="617" Y2="0" Stroke="{StaticResource 94A1BB}" Height="13"/>
+                        <TextBlock Style="{DynamicResource TextBlock1}" Height="24" Margin="10,0,0,0" ><Run Text="Школа: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoSchool" Text="" Style="{DynamicResource TextBlock2}" Height="17" Width="520"/>
+                        </InlineUIContainer></TextBlock>
+                        <TextBlock Style="{DynamicResource TextBlock1}" Height="24" Margin="10,0,0,0" ><Run Text="Год окончания: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoYear" Text="" Style="{DynamicResource TextBlock2}" Height="20" Width="476"/>
+                        </InlineUIContainer></TextBlock>
+                        <TextBlock Style="{DynamicResource TextBlock1}" Height="24" Margin="10,0,0,0"><Run Text="Дата рождения: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoDate" Text="" Style="{DynamicResource TextBlock2}" Height="17" Width="466"/>
+                        </InlineUIContainer></TextBlock>
+                        <TextBlock x:Name="infoLgotiTB" Style="{DynamicResource TextBlock1}" Height="24" Margin="10,0,0,0"><Run Text="Льготы: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoLgoti" Text="" Style="{DynamicResource TextBlock2}" Height="18" Width="524"/>
+                        </InlineUIContainer></TextBlock>
+                        <TextBlock x:Name="infoStatiTB" Style="{DynamicResource TextBlock1}" Margin="10,0,0,0" ><Run Text="Статьи: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoStati" Text="" Style="{DynamicResource TextBlock2}" Height="19" Width="524"/>
+                        </InlineUIContainer></TextBlock>
+                    </StackPanel>
+                    <Grid Grid.Column="2" Margin="0,1,20,8" Grid.Row="1" MinHeight="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="690"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="ПАСПОРТНЫЕ ДАННЫЕ" Style="{DynamicResource TextBlockzagolovok}" Grid.Column="0" Grid.Row="0" Margin="10,10,0,0"/>
+                        <Line X1="0" Y1="0" X2="617" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="10,29,10,111" />
+                        <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,44,10,89"><Run Text="Вид документа: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoVidDoc" Style="{DynamicResource TextBlock2}" Height="18" Width="549"><Run Text=""/><InlineUIContainer>
+                                    <TextBlock Style="{DynamicResource TextBlock1}" Height="17" Width="475"><Run Text="  Дата выдачи: " FontWeight="Bold"/><InlineUIContainer>
+                                            <TextBlock x:Name="infoDateVidoci" Text="" Style="{DynamicResource TextBlock2}" Height="16" Width="380"/>
+                                        </InlineUIContainer></TextBlock>
+                                </InlineUIContainer></TextBlock>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,66,10,64"><Run Text="Серия: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock Style="{DynamicResource TextBlock2}" Height="19" Width="559"><Run x:Name="infoSeriya" Text=""/><InlineUIContainer>
+                                    <TextBlock Style="{DynamicResource TextBlock1}" Height="20" Width="580"><Run Text="  Номер паспорта: " FontWeight="Bold"/><InlineUIContainer>
+                                            <TextBlock x:Name="infoPassNum" Text="" Style="{DynamicResource TextBlock2}" Height="20" Width="559"/>
+                                        </InlineUIContainer></TextBlock>
+                                </InlineUIContainer></TextBlock>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,86,10,47"><Run Text="Кем выдан: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infokemvidan" Text="" Style="{DynamicResource TextBlock2}" Height="18" Width="549"/>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,108,10,25"><Run Text="Идентификационный номер: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoIdentNum" Text="" Style="{DynamicResource TextBlock2}" Height="18" Width="613"/>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,130,10,0"><Run Text="Гражданство: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoGrajdanstvo" Text="" Style="{DynamicResource TextBlock2}" Height="18" Width="613"/>
+                        </InlineUIContainer></TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" Margin="0,0,0,10" Grid.Row="2" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="71*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="ДАННЫЕ О МЕСТЕ РАБОТЫ" Style="{DynamicResource TextBlockzagolovok}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Margin="10"/>
+                    <Line X1="0" Y1="0" X2="1400" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="10,31,10,34" Grid.ColumnSpan="2" RenderTransformOrigin="0.502,1.094" />
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,44,10,0"><Run Text="Место работы: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoMestoRaboti" Text="" Style="{DynamicResource TextBlock2}" Height="24" Width="470"/>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,44,10,0" Grid.Column="1"><Run Text="Занимаемая должность: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoDoljnost" Text="" Style="{DynamicResource TextBlock2}" Height="30" Width="485"/>
+                        </InlineUIContainer></TextBlock>
+                </Grid>
+                <Grid Grid.Column="1" Margin="0,0,0,14" Grid.Row="3" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="71*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="ТЕХНИЧЕСКИЕ ДАННЫЕ" Style="{DynamicResource TextBlockzagolovok}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Margin="10,10,10,66"/>
+                    <Line X1="0" Y1="0" X2="1400" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="10,31,10,53" Grid.ColumnSpan="2" />
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,44,10,10"><Run Text="Владелец: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoVladelec" Text="" Style="{DynamicResource TextBlock2}" Height="29" Width="475"/>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock x:Name="infoRedaktorTB" Style="{DynamicResource TextBlock1}" Margin="10,44,10,10" Grid.Column="1"><Run Text="Редактор: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoRedaktor" Text="" Style="{DynamicResource TextBlock2}" Height="27" Width="546"/>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock Style="{DynamicResource TextBlock1}" Margin="10,85,10,10"><Run Text="Дата ввода: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoDateVvoda" Text="" Style="{DynamicResource TextBlock2}" Height="23" Width="463"/>
+                        </InlineUIContainer></TextBlock>
+                    <TextBlock x:Name="infoDateRedactTB" Style="{DynamicResource TextBlock1}" Margin="10,85,10,10" Grid.Column="1"><Run Text="Дата редактирования: " FontWeight="Bold"/><InlineUIContainer>
+                            <TextBlock x:Name="infoDateRedact" Text="" Style="{DynamicResource TextBlock2}" Height="26" Width="456"/>
+                        </InlineUIContainer></TextBlock>
+                </Grid>
+                <TabControl Grid.Column="1" Style="{DynamicResource TabControlStyle}" Grid.Row="4" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="284">
+                    <TabItem Margin="10,0,-33,0" Header="Аттестат" Style="{DynamicResource TabItemStyle}">
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="993*"/>
+                                <ColumnDefinition Width="210"/>
+                                <ColumnDefinition Width="17"/>
+                            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,183" Grid.ColumnSpan="3" >
+                <Label Content="Оценки в аттестате" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,17,0,3" Height="43" MinHeight="32" Width="149"/>
+                <TextBlock x:Name="atestatCount" MinHeight="14"  FontFamily="{StaticResource Montserrat-Regular}" FontSize="12" Background="#FFE4E3E3" VerticalAlignment="Center" TextAlignment="Center" MaxWidth="30" Width="24" Margin="0,23,0,26" Foreground="#FF747474" Height="9"/>
+            </StackPanel>
+            <DataGrid x:Name="AtestatGrid" Style="{DynamicResource dgAbbiturients}" Margin="0,58,0,10" Grid.ColumnSpan="3" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IDАтестата}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="№ Серии" Width="3*" Binding="{Binding Num}"/>
+                    <DataGridTextColumn Header="1" Width="1*" Binding="{Binding n1}"/>
+                    <DataGridTextColumn Header="2" Width="1*" Binding="{Binding n2}"/>
+                    <DataGridTextColumn Header="3" Width="1*" Binding="{Binding n3}"/>
+                    <DataGridTextColumn Header="4" Width="1*" Binding="{Binding n4}"/>
+                    <DataGridTextColumn Header="5" Width="1*" Binding="{Binding n5}"/>
+                    <DataGridTextColumn Header="6" Width="1*" Binding="{Binding n6}"/>
+                    <DataGridTextColumn Header="7" Width="1*" Binding="{Binding n7}"/>
+                    <DataGridTextColumn Header="8" Width="1*" Binding="{Binding n8}"/>
+                    <DataGridTextColumn Header="9" Width="1*" Binding="{Binding n9}"/>
+                    <DataGridTextColumn Header="10" Width="1*" Binding="{Binding n10}"/>
+                    <DataGridTextColumn Header="11" Width="1*" Binding="{Binding n11}"/>
+                    <DataGridTextColumn Header="12" Width="1*" Binding="{Binding n12}"/>
+                    <DataGridTextColumn Header="13" Width="1*" Binding="{Binding n13}"/>
+                    <DataGridTextColumn Header="14" Width="1*" Binding="{Binding n14}"/>
+                    <DataGridTextColumn Header="15" Width="1*" Binding="{Binding n15}"/>
+                    <DataGridTextColumn Header="ПЕРЕВОДНАЯ ШКАЛА" Width="5*" Binding="{Binding Scale}"/>
+                    <DataGridTextColumn Header="CРЕДНИЙ БАЛЛ" Width="4*" Binding="{Binding СреднийБалл}"/>
+                    <DataGridTextColumn Header="ДЕСЯТИБАЛЬНАЯ СИСТЕМА" Width="7*" Binding="{Binding ДесятибальнаяСистема}"/>
+                    <DataGridTemplateColumn Header="ДЕЙСТВИЕ" Width="5*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/pencil-alt.png" MouseUp="Image_AtestatRedakt" />
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/dots-horizontal.png" MouseUp="Image_MouseUp_2">
+                                        <Image.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Удалить" Click="MenuItem_DeleteAtestat"/>
+                                            </ContextMenu>
+                                        </Image.ContextMenu>
+                                    </Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+                <TextBox Visibility="Hidden" Margin="0,10,0,200" Style="{DynamicResource textboxSearch}" Text="" Background="#2676829B" Foreground="#FF76829B" Grid.Column="1"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Margin="65,0,-95,0" Header="Cертификат ЦТ" Style="{DynamicResource TabItemStyle}">
+                        <Grid Background="#FFE5E5E5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="993*"/>
+                                <ColumnDefinition Width="210"/>
+                                <ColumnDefinition Width="17"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Fill="White" Margin="0,0,0,183" Grid.ColumnSpan="3"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,183" Grid.ColumnSpan="3" >
+                <Label Content="Сертифткаты ЦТ абитуриента" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Margin="20,18,0,0" MinHeight="32" Width="211"/>
+                <TextBlock x:Name="sertificatCount" MinHeight="14"  FontFamily="{StaticResource Montserrat-Regular}" FontSize="12" Background="#FFE4E3E3" VerticalAlignment="Center" TextAlignment="Center" MaxWidth="30" Width="24" Margin="0,25,0,26" Foreground="#FF747474" Height="7"/>
+            </StackPanel>
+            <DataGrid x:Name="SertificatiCTGrid" Style="{DynamicResource dgAbbiturients}" Margin="0,58,0,0" Grid.ColumnSpan="3" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Visibility="Hidden" Binding="{Binding IDСертификатаЦТ}"/>
+                    <DataGridTextColumn Header="№ Серии" Width="2*" Binding="{Binding num}"/>
+                    <DataGridTextColumn Header="ПРЕДМЕТ" Width="3*" Binding="{Binding Дисциплина}"/>
+                    <DataGridTextColumn Header="ГОД ПРОХОЖДЕНИЯ" Width="3*" Binding="{Binding ГодПрохождения}"/>
+                    <DataGridTextColumn Header="БАЛЛ ЦТ" Width="3*" Binding="{Binding Балл}"/>
+                    <DataGridTextColumn Header="ДЕСЯТИБАЛЬНАЯ ШКАЛА" Width="3*" Binding="{Binding ДесятибальноеЗначение}"/>
+                    <DataGridTemplateColumn Header="ДЕЙСТВИЕ" Width="3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/pencil-alt.png" MouseUp="Image_CTRedakt" />
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/dots-horizontal.png" MouseUp="Image_MouseUp_2">
+                                        <Image.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Удалить" Click="MenuItem_DeleteCT"/>
+                                            </ContextMenu>
+                                        </Image.ContextMenu>
+                                    </Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+                <TextBox Visibility="Hidden" Margin="0,10,0,200" Style="{DynamicResource textboxSearch}" Text="" Background="#2676829B" Foreground="#FF76829B" Grid.Column="1"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Контактные данные" Style="{DynamicResource TabItemStyle}" Margin="121,0,-134,0">
+                        <Grid Background="#FFE5E5E5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="210"/>
+                                <ColumnDefinition Width="17"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Fill="White" Margin="0,0,0,189" Grid.ColumnSpan="3"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,183" Grid.ColumnSpan="3" >
+                <Label Content="Контактные данные абитуриента" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Margin="20,18,0,0" MinHeight="32" Width="232"/>
+                <TextBlock Name="contactsCount" MinHeight="14"  FontFamily="{StaticResource Montserrat-Regular}" FontSize="12" Background="#FFE4E3E3" VerticalAlignment="Center" TextAlignment="Center" MaxWidth="30" Width="24" Margin="0,24,0,26" Foreground="#FF747474" Height="8"/>
+            </StackPanel>
+            <DataGrid x:Name="kontaktnieDannieGrid" Style="{DynamicResource dgAbbiturients}" Margin="0,58,0,0" Grid.ColumnSpan="3" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Visibility="Hidden" Binding="{Binding IDКонтактныеДанные}"/>
+                    <DataGridTextColumn Header="№" Width="1*" Binding="{Binding Num}"/>
+                    <DataGridTextColumn Header="ТИП КОНТАКТА" Width="3*" Binding="{Binding ТипКонтакта}"/>
+                    <DataGridTextColumn Header="СВЕДЕНИЯ" Width="6*" Binding="{Binding Сведения}"/>
+                    <DataGridTemplateColumn Header="ДЕЙСТВИЕ" Width="3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/pencil-alt.png" MouseUp="Image_KontaktsRedakt" />
+                                    <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/dots-horizontal.png" MouseUp="Image_MouseUp_2">
+                                        <Image.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Удалить" Click="MenuItem_DeleteContact"/>
+                                            </ContextMenu>
+                                        </Image.ContextMenu>
+                                    </Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+                <TextBox Visibility="Hidden" Margin="0,10,0,200" Style="{DynamicResource textboxSearch}" Text="" Background="#2676829B" BorderBrush="{x:Null}" Foreground="#FF76829B" Grid.Column="1"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </ScrollViewer>
+        </Grid>
+        <!--#endregion-->
+        <!--#region форма добавления/редактирования записей-->
+                <Grid Visibility="Hidden" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="93"/>
+                        <ColumnDefinition Width="141*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="1154*"/>
+                        <ColumnDefinition Width="12"/>
+                    </Grid.ColumnDefinitions>
+                    <TabControl Name="TabControlAddEditForm" BorderThickness="0" TabStripPlacement="Left" Background="{x:Null}" Grid.ColumnSpan="4" Margin="0,0,-0.491,0" Grid.Column="1" SelectionChanged="TabControlAddEditForm_SelectionChanged">
+                        <TabItem Header="ОСНОВНОЕ" Style="{DynamicResource TabItemAdd}" Padding="8,2,6,2" VerticalContentAlignment="Top" Margin="0,10,0,-10">
+                            <Grid Margin="-1,0,0,0">
+                            <ScrollViewer Name="ScrollAddMain" Foreground="{StaticResource font}" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" Margin="10">
+                                <StackPanel x:Name="AddEditMainData" Width="502" VerticalAlignment="Top" >
+                                    <TextBlock Text="СПЕЦИАЛЬНОСТЬ" Margin="10,0,0,10"/>
+                                    <ComboBox Tag="Error" x:Name="addEditFormspecialnost" Style="{DynamicResource ComboBoxFlatStyle}" SelectionChanged="AddEditFormspecialnost_SelectionChanged"/>
+                                    <StackPanel Height="66" Orientation="Horizontal" Margin="0,25,0,0">
+                                        <StackPanel Width="240">
+                                            <TextBlock Text="ФОРМА ОБУЧЕНИЯ" Margin="10,0,0,10"/>
+                                    <ComboBox  SelectedIndex="0" x:Name="addEditFormobushenie" Style="{DynamicResource ComboBoxFlatStyle}" SelectionChanged="AddEditFormobushenie_SelectionChanged"/>
+                                        </StackPanel>
+                                        <StackPanel Width="240" Margin="22,0,0,0">
+                                            <TextBlock Text="ФИНАНСИРОВАНИЕ" Margin="10,0,0,10"/>
+                                    <ComboBox SelectedIndex="0" x:Name="addEditFormFinansirovanie" Style="{DynamicResource ComboBoxFlatStyle}" SelectionChanged="AddEditFormFinansirovanie_SelectionChanged"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Text="ОБРАЗОВАНИЕ" Margin="10,25,0,10"/>
+                                    <ComboBox SelectedIndex="0" x:Name="addEditFormobrazovanie" Style="{DynamicResource ComboBoxFlatStyle}"/>
+                                    <TextBlock Text="НОМЕР ЭКЗАМЕНАЦИОННОГО ЛИСТА" Margin="10,25,0,10"/>
+                                    <TextBox x:Name="addEditFormExamList" Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged"/>
+                                    <TextBlock Text="ФАМИЛИЯ" Margin="10,25,0,10"/>
+                                    <TextBox x:Name="addEditFormSurename" Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged"/>
+                                    <TextBlock Text="ИМЯ" Margin="10,25,0,10"/>
+                                    <TextBox x:Name="addEditFormName" Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged"/>
+                                    <TextBlock Text="ОТЧЕСТВО" Margin="10,25,0,10"/>
+                                    <TextBox x:Name="addEditFormOtchestvo" Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged"/>
+                                    <TextBlock Text="ГРАЖДАНСТВО" Margin="10,25,0,10"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox x:Name="AddFormGrajdanstvo" Style="{DynamicResource TextBox}" Width="326" TextChanged="AddFormGrajdanstvo_TextChanged"/>
+                                        <CheckBox x:Name="AddFormChekBoxGrajdanstvo" Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Гражданин РБ" Margin="40,0,0,0" Checked="CheckBox_Checked"/>
+                                    </StackPanel>
+                                    <TextBlock Text="НУЖНО ОБЩЕЖИТИЕ" Margin="10,25,0,10"/>
+                                    <CheckBox x:Name="addEditFormObshejitie" Content="Общежитие" Style="{DynamicResource CheckBoxStyleObshchiy}" Margin="20,0,0,0"/>
+                                    <TextBlock Text="ДАТА РОЖДЕНИЯ" Margin="10,25,0,10" />
+                                    <xctk:MaskedTextBox x:Name="dateOfBirth" Style="{DynamicResource TextBox}" Mask="00/00/0000" Tag="Error" TextChanged="DateOfBirth_TextChanged"/>
+                                    <TextBlock Text="ВЫБЕРИТЕ ЛЬГОТЫ" Margin="10,25,0,10"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="addEditForm_CheckBox_Dogovor" Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Целевой договор" Margin="20,0,0,0"/>
+                                        <CheckBox x:Name="addEditForm_CheckBox_DetiSiroti" Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Дети-сироты" Margin="100,0,0,0"/>
+                                    </StackPanel>
+                                    <TextBlock Text="ШКОЛА" Margin="10,25,0,10"/>
+                                    <TextBox TextChanged="TextBox_TextChanged" x:Name="addEditFormShool" Style="{DynamicResource TextBox}"/>
+                                    <TextBlock Text="ГОД ОКОНЧАНИЯ ШКОЛЫ" Margin="10,25,0,10"/>
+                                    <xctk:MaskedTextBox x:Name="addEditFormGraduationYear" Mask="0000" Style="{DynamicResource TextBox}" TextChanged="MaskedTB_IsComplited"/>
+                                    <TextBlock Text="ВЫБЕРИТЕ СТАТЬИ" Margin="10,25,0,10"/>
+                                    <StackPanel x:Name="Stati" Orientation="Horizontal">
+                                        <StackPanel Width="201">
+                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Инвалиды I и II группы" Margin="20,10,0,0"/>
+                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Дети военнослужащих" Margin="20,10,0,0"/>
+                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Диплом с отличием" Margin="20,10,0,0"/>
+                                        </StackPanel>
+                                        <StackPanel Width="183">
+                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Инвалиды III группы" Margin="20,10,0,0"/>
+                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Многодетная семья" Margin="20,10,0,0"/>
+                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Чернобыльская АЭС" Margin="20,10,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Text="МЕСТО РАБОТЫ" Margin="10,25,0,10"/>
+                                    <TextBox x:Name="textBoxWorkPlace" Style="{DynamicResource TextBox}"/>
+                                    <TextBlock Text="ДОЛЖНОСТЬ" Margin="10,25,0,10"/>
+                                    <TextBox x:Name="textBoxDoljnost" Style="{DynamicResource TextBox}"/>
+                                    
+                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="139,25,139,0" Content="СЛЕДУЮЩИЙ ЭТАП" Click="Button_NextStep_1"/>
+                                </StackPanel>
+                            </ScrollViewer>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="КОНТАКТЫ" Style="{DynamicResource TabItemAdd2}" UseLayoutRounding="True" Margin="0,20,0,-20" >
+                            <Grid >
+                                <ScrollViewer x:Name="ScrollAddContacts" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
+                                <StackPanel x:Name="AddEditFormContacts" VerticalAlignment="Top" >
+                                    <StackPanel Tag="VisibleField" Height="270">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="КОНТАКТНЫЕ ДАННЫЕ 01" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+                                        <ComboBox Name="ContactDataType" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+                                        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+                                        <xctk:MaskedTextBox Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502"/>
+                                    </StackPanel>
+                                    <StackPanel  Visibility="Collapsed" Tag="HIddenField" Height="240">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="КОНТАКТНЫЕ ДАННЫЕ 02" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+                                        <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+                                        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+                                        <xctk:MaskedTextBox Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502"/>
+                                    </StackPanel>
+                                    <StackPanel  Visibility="Collapsed" Tag="HIddenField" Height="240">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="КОНТАКТНЫЕ ДАННЫЕ 03" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+                                        <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+                                        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+                                        <xctk:MaskedTextBox Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502"/>
+                                    </StackPanel>
+                                    <StackPanel  Visibility="Collapsed" Tag="HIddenField" Height="240">
+                                       <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="КОНТАКТНЫЕ ДАННЫЕ 04" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+                                        <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+                                        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+                                        <xctk:MaskedTextBox Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502"/>
+                                    </StackPanel>
+                                    <StackPanel  Visibility="Collapsed" Tag="HIddenField" Height="240">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="КОНТАКТНЫЕ ДАННЫЕ 05" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+                                        <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+                                        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+                                        <xctk:MaskedTextBox Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502"/>
+                                    </StackPanel>
+                                    <StackPanel  Visibility="Collapsed" Tag="HIddenField" Height="240">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="КОНТАКТНЫЕ ДАННЫЕ 06" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+                                        <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+                                        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+                                        <xctk:MaskedTextBox Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502"/>
+                                    </StackPanel>
+                                    <StackPanel  Visibility="Collapsed" Tag="HIddenField" Height="240">
+                                       <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="КОНТАКТНЫЕ ДАННЫЕ 07" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+                                        <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+                                        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+                                        <xctk:MaskedTextBox Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502"/>
+                                    </StackPanel>
+                                    
+                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="115,25,115,0" Content="ДОБАВИТЬ КОНТАКТ" Width="502" Click="Button_Click_1"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="500">
+                                        <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Foreground="{StaticResource 94A1BB}" Background="#3376829B" Height="53" Margin="0,25,0,0" Content="ПРЕДЫДУЩИЙ ЭТАП" Width="235" Click="Button_PrewPage"/>
+                                        <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="30,25,0,0" Content="СЛЕДУЮЩИЙ ЭТАП" Width="235" Click="Button_NextStep_2"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="ОБРАЗОВАНИЕ" Style="{DynamicResource TabItemAdd3}" Margin="0,30,0,-30">
+                            <Grid Margin="2,0,0,0">
+                                <ScrollViewer x:Name="ScrollAddAtestats" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
+                                <StackPanel x:Name="addEdifFormAtestati" VerticalAlignment="Top" Width="833" >
+                                    <StackPanel Visibility="Visible" Tag="VisibleField" Height="605">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="ОБРАЗОВАНИЕ АБИТУРИЕНТА 01" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="СЕРИЯ АТТЕСТАТА" Width="469"/>
+                                        <TextBox Style="{DynamicResource TextBox}" Width="502"/>
+                                        <Grid Margin="0,10,0,0" Height="400" Width="504">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="168*"/>
+                                                <ColumnDefinition Width="168*"/>
+                                                <ColumnDefinition Width="168*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="18*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="ОЦЕНКИ В АТТЕСТАТЕ" Foreground="{StaticResource ResourceKey=94A1BB}" HorizontalAlignment="Center" Width="504" TextAlignment="Center" Grid.ColumnSpan="3"/>
+                                            <Line X1="0" Y1="0" X2="150" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="0,10,0,0" Grid.ColumnSpan="3"/>
+                                            <Line X1="350" Y1="0" X2="505" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="0,10,0,0" Grid.ColumnSpan="3"/>
+                                            
+                                            <TextBlock Text="КОЛИЧЕСТВО '1'" Margin="10,10,10,51" Grid.Row="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '2'" Margin="10,10,10,50" Grid.Row="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '3'" Margin="10,10,10,51" Grid.Row="3"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="3" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '4'" Margin="10,10,10,50" Grid.Row="4"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="4" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '5'" Margin="10,10,10,50" Grid.Row="5"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '6'" Margin="10,10,10,51" Grid.Row="1"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '7'" Margin="10,10,10,50" Grid.Row="2"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '8'" Margin="10,10,10,51" Grid.Row="3"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="3"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '9'" Margin="10,10,10,50" Grid.Row="4"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="4"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '10'" Margin="10,10,10,50" Grid.Row="5"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '11'" Margin="10,10,10,51" Grid.Row="1"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '12'" Margin="10,10,10,50" Grid.Row="2"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '13'" Margin="10,10,10,50" Grid.Row="3"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="3"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '14'" Margin="10,10,10,51" Grid.Row="4"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="4" Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '15'" Margin="10,10,10,50" Grid.Row="5"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                        </Grid>
+                                        <Line X1="0" Y1="15" X2="500" Y2="15" Stroke="{StaticResource 94A1BB}" Width="500" Height="30"/>
+                                            <TextBlock Text="ПЕРЕВОДНАЯ ШКАЛА" Foreground="{StaticResource 94A1BB}" Width="482"/>
+                                            <ComboBox Name="ScaleType" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="500"/>
+                                    </StackPanel>
+                                    <StackPanel Visibility="Collapsed" Tag="HIddenField" Height="605">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="ОБРАЗОВАНИЕ АБИТУРИЕНТА 02" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="СЕРИЯ АТТЕСТАТА" Width="469"/>
+                                        <TextBox Style="{DynamicResource TextBox}" Width="502"/>
+                                        <Grid Margin="0,10,0,0" Height="400" Width="504">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="168*"/>
+                                                <ColumnDefinition Width="168*"/>
+                                                <ColumnDefinition Width="168*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="18*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="ОЦЕНКИ В АТТЕСТАТЕ" Foreground="{StaticResource ResourceKey=94A1BB}" HorizontalAlignment="Center" Width="504" TextAlignment="Center" Grid.ColumnSpan="3"/>
+                                            <Line X1="0" Y1="0" X2="150" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="0,10,0,0" Grid.ColumnSpan="3"/>
+                                            <Line X1="350" Y1="0" X2="505" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="0,10,0,0" Grid.ColumnSpan="3"/>
+                                            
+                                            <TextBlock Text="КОЛИЧЕСТВО '1'" Margin="10,10,10,51" Grid.Row="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '2'" Margin="10,10,10,50" Grid.Row="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '3'" Margin="10,10,10,51" Grid.Row="3"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="3" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '4'" Margin="10,10,10,50" Grid.Row="4"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="4" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '5'" Margin="10,10,10,50" Grid.Row="5"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '6'" Margin="10,10,10,51" Grid.Row="1"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '7'" Margin="10,10,10,50" Grid.Row="2"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '8'" Margin="10,10,10,51" Grid.Row="3"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="3"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '9'" Margin="10,10,10,50" Grid.Row="4"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="4"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '10'" Margin="10,10,10,50" Grid.Row="5"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '11'" Margin="10,10,10,51" Grid.Row="1"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '12'" Margin="10,10,10,50" Grid.Row="2"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '13'" Margin="10,10,10,50" Grid.Row="3"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="3"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '14'" Margin="10,10,10,51" Grid.Row="4"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="4" Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '15'" Margin="10,10,10,50" Grid.Row="5"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                        </Grid>
+                                        <Line X1="0" Y1="15" X2="500" Y2="15" Stroke="{StaticResource 94A1BB}" Width="500" Height="30"/>
+                                            <TextBlock Text="ПЕРЕВОДНАЯ ШКАЛА" Foreground="{StaticResource 94A1BB}" Width="482"/>
+                                            <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="500"/>
+                                    </StackPanel>
+                                    <StackPanel Visibility="Collapsed" Tag="HIddenField" Height="605">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="ОБРАЗОВАНИЕ АБИТУРИЕНТА 03" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <TextBlock Text="СЕРИЯ АТТЕСТАТА" Width="469"/>
+                                        <TextBox Style="{DynamicResource TextBox}" Width="502"/>
+                                        <Grid Margin="0,10,0,0" Height="400" Width="504">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="168*"/>
+                                                <ColumnDefinition Width="168*"/>
+                                                <ColumnDefinition Width="168*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="18*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                                <RowDefinition Height="89*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="ОЦЕНКИ В АТТЕСТАТЕ" Foreground="{StaticResource ResourceKey=94A1BB}" HorizontalAlignment="Center" Width="504" TextAlignment="Center" Grid.ColumnSpan="3"/>
+                                            <Line X1="0" Y1="0" X2="150" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="0,10,0,0" Grid.ColumnSpan="3"/>
+                                            <Line X1="350" Y1="0" X2="505" Y2="0" Stroke="{StaticResource 94A1BB}" Margin="0,10,0,0" Grid.ColumnSpan="3"/>
+                                            
+                                            <TextBlock Text="КОЛИЧЕСТВО '1'" Margin="10,10,10,51" Grid.Row="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '2'" Margin="10,10,10,50" Grid.Row="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '3'" Margin="10,10,10,51" Grid.Row="3"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="3" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '4'" Margin="10,10,10,50" Grid.Row="4"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="4" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '5'" Margin="10,10,10,50" Grid.Row="5"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '6'" Margin="10,10,10,51" Grid.Row="1"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '7'" Margin="10,10,10,50" Grid.Row="2"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '8'" Margin="10,10,10,51" Grid.Row="3"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="3"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '9'" Margin="10,10,10,50" Grid.Row="4"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="4"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '10'" Margin="10,10,10,50" Grid.Row="5"  Grid.Column="1"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5"  Grid.Column="1" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '11'" Margin="10,10,10,51" Grid.Row="1"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="1" Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '12'" Margin="10,10,10,50" Grid.Row="2"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="2"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '13'" Margin="10,10,10,50" Grid.Row="3"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="3"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '14'" Margin="10,10,10,51" Grid.Row="4"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,7" Style="{DynamicResource TextBox}" Grid.Row="4" Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                            <TextBlock Text="КОЛИЧЕСТВО '15'" Margin="10,10,10,50" Grid.Row="5"  Grid.Column="2"/>
+                                            <TextBox Margin="0,28,10,6" Style="{DynamicResource TextBox}" Grid.Row="5"  Grid.Column="2" PreviewTextInput="TextBox_PreviewTextInput" />
+                                        </Grid>
+                                        <Line X1="0" Y1="15" X2="500" Y2="15" Stroke="{StaticResource 94A1BB}" Width="500" Height="30"/>
+                                            <TextBlock Text="ПЕРЕВОДНАЯ ШКАЛА" Foreground="{StaticResource 94A1BB}" Width="482"/>
+                                            <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="500"/>
+                                    </StackPanel>
+                                <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="294,25,293,0" Content="ДОБАВИТЬ ДОКУМЕНТ" Click="Button_NewAtestat"/>
+                                <StackPanel Orientation="Horizontal" Width="500" Height="88" Margin="166,0,167,0">
+                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Foreground="{StaticResource 94A1BB}" Background="#3376829B" Height="53" Margin="0,10,0,0" Content="ПРЕДЫДУЩИЙ ЭТАП" Width="235" Click="Button_PrewPage"/>
+                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="30,10,0,0" Content="СЛЕДУЮЩИЙ ЭТАП" Width="235" Click="Button_NextStep_3"/>
+                                </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="СЕРТИФИКАТ" Name="TabItemSertificat" Style="{DynamicResource TabItemAdd4}" Margin="0,40,0,-40" >
+                            <Grid>
+                                <ScrollViewer x:Name="ScrollAddCT" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" Margin="10,0,0,0">
+                                <StackPanel x:Name="addEdifFormCT" VerticalAlignment="Top" >
+                                    <StackPanel Visibility="Visible" Tag="HIddenField">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="СЕРТИФИКАТ ЦТ 01" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <Grid Margin="0,10,0,0" Height="230" Width="501">
+                                            <TextBlock Text="НОМЕР СЕРИИ" Margin="10,0,251,211"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,19,266,175" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                            <TextBlock Text="ГОД ПРОХОЖДЕНИЯ" Margin="267,0,0,211"/>
+                                            <xctk:MaskedTextBox Mask="0000" Style="{DynamicResource TextBox}" Margin="256,19,10,175" Height="36" />
+                                            <TextBlock Text="ПРЕДМЕТ" Margin="10,73,10,139"/>
+                                            <ComboBox Name="test" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Margin="0,96">
+                                                <ComboBoxItem Content="Русский язык"/>
+                                                <ComboBoxItem Content="Белорусский язык"/>
+                                                <ComboBoxItem Content="Иностранный язык"/>
+                                                <ComboBoxItem Content="Математика"/>
+                                                <ComboBoxItem Content="Обществоведение"/>
+                                                <ComboBoxItem Content="Биология"/>
+                                                <ComboBoxItem Content="Химия"/>
+                                                <ComboBoxItem Content="Физика"/>
+                                                <ComboBoxItem Content="Всемирная история"/>
+                                                <ComboBoxItem Content="История Беларуси"/>
+                                                <ComboBoxItem Content="География"/>
+                                            </ComboBox>
+                                            <TextBlock Text="БАЛЛ ЦТ" Margin="10,155,0,56"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,179,0,15" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <StackPanel Visibility="Collapsed" Tag="HIddenField">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="СЕРТИФИКАТ ЦТ 02" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <Grid Margin="0,10,0,0" Height="230" Width="501">
+                                            <TextBlock Text="НОМЕР СЕРИИ" Margin="10,0,251,211"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,19,266,175" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                            <TextBlock Text="ГОД ПРОХОЖДЕНИЯ" Margin="267,0,0,211"/>
+                                            <xctk:MaskedTextBox Mask="0000" Style="{DynamicResource TextBox}" Margin="256,19,10,175" Height="36" />
+                                            <TextBlock Text="ПРЕДМЕТ" Margin="10,73,10,139"/>
+                                            <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Margin="0,96">
+                                                <ComboBoxItem Content="Русский язык"/>
+                                                <ComboBoxItem Content="Белорусский язык"/>
+                                                <ComboBoxItem Content="Иностранный язык"/>
+                                                <ComboBoxItem Content="Математика"/>
+                                                <ComboBoxItem Content="Обществоведение"/>
+                                                <ComboBoxItem Content="Биология"/>
+                                                <ComboBoxItem Content="Химия"/>
+                                                <ComboBoxItem Content="Физика"/>
+                                                <ComboBoxItem Content="Всемирная история"/>
+                                                <ComboBoxItem Content="История Беларуси"/>
+                                                <ComboBoxItem Content="География"/>
+                                            </ComboBox>
+                                            <TextBlock Text="БАЛЛ ЦТ" Margin="10,155,0,56"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,179,0,15" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <StackPanel Visibility="Collapsed" Tag="HIddenField">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="СЕРТИФИКАТ ЦТ 03" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <Grid Margin="0,10,0,0" Height="230" Width="501">
+                                            <TextBlock Text="НОМЕР СЕРИИ" Margin="10,0,251,211"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,19,266,175" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                            <TextBlock Text="ГОД ПРОХОЖДЕНИЯ" Margin="267,0,0,211"/>
+                                            <xctk:MaskedTextBox Mask="0000" Style="{DynamicResource TextBox}" Margin="256,19,10,175" Height="36" />
+                                            <TextBlock Text="ПРЕДМЕТ" Margin="10,73,10,139"/>
+                                            <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Margin="0,96">
+                                                <ComboBoxItem Content="Русский язык"/>
+                                                <ComboBoxItem Content="Белорусский язык"/>
+                                                <ComboBoxItem Content="Иностранный язык"/>
+                                                <ComboBoxItem Content="Математика"/>
+                                                <ComboBoxItem Content="Обществоведение"/>
+                                                <ComboBoxItem Content="Биология"/>
+                                                <ComboBoxItem Content="Химия"/>
+                                                <ComboBoxItem Content="Физика"/>
+                                                <ComboBoxItem Content="Всемирная история"/>
+                                                <ComboBoxItem Content="История Беларуси"/>
+                                                <ComboBoxItem Content="География"/>
+                                            </ComboBox>
+                                            <TextBlock Text="БАЛЛ ЦТ" Margin="10,155,0,56"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,179,0,15" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <StackPanel Visibility="Collapsed" Tag="HIddenField">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="СЕРТИФИКАТ ЦТ 04" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <Grid Margin="0,10,0,0" Height="230" Width="501">
+                                            <TextBlock Text="НОМЕР СЕРИИ" Margin="10,0,251,211"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,19,266,175" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                            <TextBlock Text="ГОД ПРОХОЖДЕНИЯ" Margin="267,0,0,211"/>
+                                            <xctk:MaskedTextBox Mask="0000" Style="{DynamicResource TextBox}" Margin="256,19,10,175" Height="36" />
+                                            <TextBlock Text="ПРЕДМЕТ" Margin="10,73,10,139"/>
+                                            <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Margin="0,96">
+                                                <ComboBoxItem Content="Русский язык"/>
+                                                <ComboBoxItem Content="Белорусский язык"/>
+                                                <ComboBoxItem Content="Иностранный язык"/>
+                                                <ComboBoxItem Content="Математика"/>
+                                                <ComboBoxItem Content="Обществоведение"/>
+                                                <ComboBoxItem Content="Биология"/>
+                                                <ComboBoxItem Content="Химия"/>
+                                                <ComboBoxItem Content="Физика"/>
+                                                <ComboBoxItem Content="Всемирная история"/>
+                                                <ComboBoxItem Content="История Беларуси"/>
+                                                <ComboBoxItem Content="География"/>
+                                            </ComboBox>
+                                            <TextBlock Text="БАЛЛ ЦТ" Margin="10,155,0,56"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,179,0,15" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <StackPanel Visibility="Collapsed" Tag="HIddenField">
+                                        <Grid MinHeight="30" Height="29">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="СЕРТИФИКАТ ЦТ 05" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+                                        </Grid>
+                                        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+                                        <Grid Margin="0,10,0,0" Height="230" Width="501">
+                                            <TextBlock Text="НОМЕР СЕРИИ" Margin="10,0,251,211"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,19,266,175" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                            <TextBlock Text="ГОД ПРОХОЖДЕНИЯ" Margin="267,0,0,211"/>
+                                            <xctk:MaskedTextBox Mask="0000" Style="{DynamicResource TextBox}" Margin="256,19,10,175" Height="36" />
+                                            <TextBlock Text="ПРЕДМЕТ" Margin="10,73,10,139"/>
+                                            <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Margin="0,96">
+                                                <ComboBoxItem Content="Русский язык"/>
+                                                <ComboBoxItem Content="Белорусский язык"/>
+                                                <ComboBoxItem Content="Иностранный язык"/>
+                                                <ComboBoxItem Content="Математика"/>
+                                                <ComboBoxItem Content="Обществоведение"/>
+                                                <ComboBoxItem Content="Биология"/>
+                                                <ComboBoxItem Content="Химия"/>
+                                                <ComboBoxItem Content="Физика"/>
+                                                <ComboBoxItem Content="Всемирная история"/>
+                                                <ComboBoxItem Content="История Беларуси"/>
+                                                <ComboBoxItem Content="География"/>
+                                            </ComboBox>
+                                            <TextBlock Text="БАЛЛ ЦТ" Margin="10,155,0,56"/>
+                                            <TextBox Style="{DynamicResource TextBox}" Margin="0,179,0,15" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                        </Grid>
+                                    </StackPanel>
+                                <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="115,25,115,0" Content="ДОБАВИТЬ ДОКУМЕНТ" Width="502" Click="ButtonNewSertificatCT"/>
+                                <StackPanel Orientation="Horizontal" Width="501">
+                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Foreground="{StaticResource 94A1BB}" Background="#3376829B" Height="53" Margin="0,25,0,0" Content="ПРЕДЫДУЩИЙ ЭТАП" Width="235" Click="Button_PrewPage"/>
+                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="30,25,0,0" Content="СЛЕДУЮЩИЙ ЭТАП" Width="235" Click="Button_NextStep_4"/>
+                                </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="ПАСПОРТ" Style="{DynamicResource TabItemAdd5}" Margin="0,50,0,-50" >
+                            <Grid >
+                                <ScrollViewer x:Name="ScrollAddPassport" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
+                                    <StackPanel Name="AddEditFormPassport" VerticalAlignment="Top" Width="506">
+                                        <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="ВИД ДОКУМЕНТА" Margin="20,0,0,10" Width="290"/>
+                                        <TextBlock Text="ДАТА ВЫДАЧИ" Width="253" Margin="0,0,0,10"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                        <ComboBox Name="AddEditFormVidDokumenta" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="272" Height="35">
+                                            <ComboBoxItem>
+                                                <TextBlock Text="Паспорт"/>
+                                            </ComboBoxItem>
+                                        </ComboBox>
+                                        
+                                        <xctk:MaskedTextBox Name="PassportDateVidachi" Style="{DynamicResource TextBox}"  Height="35" Mask="00/00/0000" Tag="Error" TextChanged="DateOfBirth_TextChanged" Margin="20,0,0,0" Width="213"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock  Margin="20,15,0,10" Text="СЕРИЯ" />
+                                            <TextBlock Margin="70,15,0,10" Text="НОМЕР ПАСПОРТА"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:Name="PassportSeriya" Style="{DynamicResource TextBox}"  Height="35" Width="107" PreviewTextInput="Tb_SeriyaPasporta_PreviewTextInput" TextChanged="PassportSeriya_TextInput"/>
+                                            <TextBox x:Name="PassportNomer" Style="{DynamicResource TextBox}" Height="35" PreviewTextInput="TextBox_PreviewTextInput" Margin="10,0,0,0" Width="388"/>
+                                        </StackPanel>
+                                        <TextBlock Margin="20,15,0,10" Text="КЕМ ВЫДАН" />
+                                        <TextBox x:Name="PassportVidan" Style="{DynamicResource TextBox}" Height="35"/>
+                                        <TextBlock Margin="20,15,0,10" Text="ИДЕНТИФИКАЦИОННЫЙ НОМЕР" />
+                                        <TextBox x:Name="PassportIdentNum" Style="{DynamicResource TextBox}" Height="35" PreviewTextInput="Tb_IdentNuber_PreviewTextInput"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                            <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Foreground="{StaticResource 94A1BB}" Background="#3376829B" Height="53" Content="ПРЕДЫДУЩИЙ ЭТАП" Width="235" Click="Button_PrewPage"/>
+                                            <Button x:Name="AddEndButton" Style="{DynamicResource ButtonStyleObshchiyRED}" Visibility="Collapsed" Margin="35,0,0,0" Background="{StaticResource 1A95B0}" Height="53" Content="ЗАВЕРШИТЬ" Width="235" Click="Button_AddEnd"/>
+                                            <Button x:Name="EditEndButton" Style="{DynamicResource ButtonStyleObshchiyRED}" Visibility="Visible" Margin="35,0,0,0" Background="{StaticResource 1A95B0}" Height="53" Content="ЗАВЕРШИТЬ" Width="235" Click="Button_EditEnd"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+        <!--#endregion-->
+    </Grid>
+</Window>
