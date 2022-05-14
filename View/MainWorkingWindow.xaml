@@ -62,7 +62,7 @@
         <!--#endregion-->
         <!--#region Планы приема-->
         <Grid x:Name="MainGrid" Margin="10,32,0,0" Visibility="Visible" Grid.Column="1" Grid.Row="2">
-            <Label Content="ПЛАН ПРИЁМА 2021" HorizontalAlignment="Left" Margin="39,13,0,0" VerticalAlignment="Top" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Foreground="#FF76829B" Height="26" Width="382"/>
+            <Label Name="lbPlanPriema" Content="ПЛАН ПРИЁМА 2021" HorizontalAlignment="Left" Margin="39,13,0,0" VerticalAlignment="Top" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Foreground="#FF76829B" Height="26" Width="382"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,44,0,0">
                 <Grid Grid.Column="2" RenderTransformOrigin="0.5,0.5">
                     <Grid.RowDefinitions>
@@ -554,7 +554,7 @@
         </Grid>
         <!--#endregion-->
         <!--#region форма добавления/редактирования записей-->
-                <Grid Visibility="Visible" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
+                <Grid Visibility="Hidden" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="93"/>
                         <ColumnDefinition Width="141*"/>
@@ -752,7 +752,7 @@
                             <Grid Margin="2,0,0,0">
                                 <ScrollViewer x:Name="ScrollAddAtestats" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
                                 <StackPanel x:Name="addEdifFormAtestati" VerticalAlignment="Top" Width="833" >
-                                    <StackPanel Visibility="Visible" Tag="VisibleField" Height="605">
+                                    <StackPanel Visibility="Visible" Tag="VisibleField" Height="605" Margin="20,0">
                                         <Grid MinHeight="30" Height="29">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
@@ -817,13 +817,14 @@
                                         <TextBlock Text="ПЕРЕВОДНАЯ ШКАЛА" Foreground="{StaticResource 94A1BB}" Width="482"/>
                                         <ComboBox Name="ScaleType" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="500" SelectionChanged="ScaleType_SelectionChanged"/>
                                     </StackPanel>
-                                     <StackPanel Visibility="Collapsed" Tag="HIddenField" Height="605">
+                                     <StackPanel Visibility="Collapsed" Tag="HIddenField" Height="605" Margin="20,0">
                                         <Grid MinHeight="30" Height="29">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition Width="30"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="ОБРАЗОВАНИЕ АБИТУРИЕНТА 02" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <TextBlock Text="ОБРАЗОВАНИЕ АБИТУРИЕНТА 02" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}" Margin="0,6,19,6"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
                                         </Grid>
                                         <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
                                         <TextBlock Text="СЕРИЯ АТТЕСТАТА" Width="469"/>
@@ -882,13 +883,14 @@
                                         <TextBlock Text="ПЕРЕВОДНАЯ ШКАЛА" Foreground="{StaticResource 94A1BB}" Width="482"/>
                                         <ComboBox SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="500" SelectionChanged="ScaleType_SelectionChanged"/>
                                     </StackPanel>
-                                    <StackPanel Visibility="Collapsed" Tag="HIddenField" Height="605">
+                                    <StackPanel Visibility="Collapsed" Tag="HIddenField" Height="605" Margin="20,0">
                                         <Grid MinHeight="30" Height="29">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition Width="30"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="ОБРАЗОВАНИЕ АБИТУРИЕНТА 03" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+                                            <Button Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
                                         </Grid>
                                         <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
                                         <TextBlock Text="СЕРИЯ АТТЕСТАТА" Width="469"/>

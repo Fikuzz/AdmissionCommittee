@@ -139,6 +139,7 @@ namespace PriyemnayaKomissiya.View
         }
         private void MainWorkingWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            lbPlanPriema.Content = "ПЛАН ПРИЕМА " + DateTime.Now.Year;
             var date = new StringBuilder(DateTime.Now.ToString("dddd, d MMMM"));
             date[0] = char.ToUpper(date[0]);
             lDate.Content = date.ToString();
@@ -361,8 +362,8 @@ namespace PriyemnayaKomissiya.View
                     if (Convert.ToBoolean(reader[2]) == true) { abiturient.Lgoti += "Cирота"; }
                     if (Convert.ToBoolean(reader[3]) == true) { abiturient.Lgoti += (abiturient.Lgoti.Length == 0 ? "" : "\n") + "Договор"; }
                     if (Convert.ToBoolean(reader[6]) == true) { abiturient.Status = "Зачислен"; }
-                    else if (Convert.ToBoolean(reader[7]) == true) { abiturient.Status = "Отозвано"; }
-                    else abiturient.Status = "Принято";
+                    else if (Convert.ToBoolean(reader[7]) == true) { abiturient.Status = "Документы выданы"; }
+                    else abiturient.Status = "Документы приняты";
 
                     
 
@@ -573,7 +574,7 @@ namespace PriyemnayaKomissiya.View
             {
                 MessageBox.Show(ex.Message);
             }
-            try//Атестаты
+            try//Аттестаты
             {
                 SqlConnection connection = new SqlConnection(connectionString);
                 SqlCommand command = new SqlCommand("Get_AbiturientaAttestat", connection);
@@ -811,30 +812,38 @@ namespace PriyemnayaKomissiya.View
                 {
                     SqlConnection connection = new SqlConnection(connectionString);
                     connection.Open();
-
                     SqlCommand command = new SqlCommand("Get_AbiturientaAttestat", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@abiturient", ((AbiturientDGItem)dataDridAbiturients.SelectedItem).ID);
                     SqlDataReader reader = command.ExecuteReader();
                     int lastPoint = 0;
+
+                    bool haveAttestat = false;
                     while (reader.Read())
                     {
                         for (int i = lastPoint; i < addEdifFormAtestati.Children.Count; i++)
                         {
-                            string Tag = ((StackPanel)addEdifFormAtestati.Children[i]).Tag.ToString();
-                            if (Tag == "VisibleField" || Tag == "HIddenField")
+                            string AttestatTag = ((StackPanel)addEdifFormAtestati.Children[i]).Tag.ToString();
+                            if (AttestatTag == "VisibleField" || AttestatTag == "HIddenField")
                             {
+                                haveAttestat = true;
                                 try
                                 {
-                                    ComboBox comboBox = (ComboBox)((StackPanel)addEdifFormAtestati.Children[i]).Children[7];
-                                    string sql1 = "SELECT Наименование FROM Шкала";
+                                    ComboBox comboBox = (ComboBox)((StackPanel)addEdifFormAtestati.Children[i]).Children[8];
+                                    string sql1 = "SELECT Наименование, КоличествоБаллов FROM Шкала";
                                     SqlConnection connection1 = new SqlConnection(connectionString);
                                     SqlCommand command1 = new SqlCommand(sql1, connection1);
                                     connection1.Open();
                                     SqlDataReader reader1 = command1.ExecuteReader();
                                     comboBox.Items.Clear();
                                     while (reader1.Read())
-                                        comboBox.Items.Add(reader1[0]);
+                                    {
+                                        ComboBoxItem boxItem = new ComboBoxItem();
+                                        boxItem.Content = reader1.GetString(0);
+                                        boxItem.Tag = reader1.GetInt32(1);
+                                        comboBox.Items.Add(boxItem);
+                                    }
+                                    reader1.Close();
                                     addEdifFormAtestati.Height += 450;
                                     comboBox.SelectedIndex = 0;
                                     connection1.Close();
@@ -854,15 +863,43 @@ namespace PriyemnayaKomissiya.View
                                 {
                                     ((TextBox)grid.Children[j]).Text = reader[j / 2].ToString();
                                 }
-                                ((ComboBox)stackPanel.Children[7]).SelectedItem = reader[17].ToString();
+                                ((ComboBox)stackPanel.Children[8]).SelectedItem = reader[17].ToString();
                                 lastPoint = i + 1;
                                 break;
                             }
                         }
                     }
+                    reader.Close();
+                    if (haveAttestat == false)
+                    {
+                        try
+                        {
+                            string sql = "SELECT Наименование, КоличествоБаллов FROM Шкала";
+                            SqlCommand command2 = new SqlCommand(sql, connection);
+                            SqlDataReader reader2 = command2.ExecuteReader();
+                            ScaleType.Items.Clear();
+                            while (reader2.Read())
+                            {
+                                ComboBoxItem item = new ComboBoxItem()
+                                {
+                                    Content = reader2.GetString(0),
+                                    Tag = reader2.GetInt32(1)
+                                };
+                                ScaleType.Items.Add(item);
+                            }
+                            ScaleType.SelectedIndex = 0;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
                     connection.Close();
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }//Атестаты
+                catch (Exception ex) 
+                { 
+                    MessageBox.Show(ex.Message); 
+                }//Аттестаты
                 try
                 {
                     SqlConnection connection = new SqlConnection(connectionString);
@@ -1117,15 +1154,22 @@ namespace PriyemnayaKomissiya.View
                 {
                     try
                     {
-                        ComboBox comboBox = (ComboBox)((StackPanel)addEdifFormAtestati.Children[i]).Children[7];
-                        string sql = "SELECT Наименование FROM Шкала";
+                        ComboBox comboBox = (ComboBox)((StackPanel)addEdifFormAtestati.Children[i]).Children[8];
+                        string sql = "SELECT Наименование, КоличествоБаллов FROM Шкала";
                         SqlConnection connection = new SqlConnection(connectionString);
                         SqlCommand command = new SqlCommand(sql, connection);
                         connection.Open();
                         SqlDataReader reader = command.ExecuteReader();
                         comboBox.Items.Clear();
                         while (reader.Read())
-                            comboBox.Items.Add(reader[0]);
+                        {
+                            ComboBoxItem boxItem = new ComboBoxItem()
+                            {
+                                Content = reader.GetString(0),
+                                Tag = reader.GetInt32(1)
+                            };
+                            comboBox.Items.Add(boxItem);
+                        }
                         comboBox.SelectedIndex = 0;
                         connection.Close();
                     }
@@ -1430,7 +1474,8 @@ namespace PriyemnayaKomissiya.View
                         SqlCommand command = new SqlCommand("Add_Atestat", connection);
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@abiturient", AbiturientID);
-                        command.Parameters.AddWithValue("@scaleName", ((ComboBox)stackPanel.Children[7]).SelectedItem);
+                        ComboBoxItem item = (ComboBoxItem)((ComboBox)stackPanel.Children[8]).SelectedItem;
+                        command.Parameters.AddWithValue("@scaleName", item.Content);
                         command.Parameters.AddWithValue("@attestatSeries", ((TextBox)stackPanel.Children[3]).Text);
                         command.Parameters.AddWithValue("@avgMarks", markAvg.ToString().Replace(',', '.'));
                         SqlDataReader reader = command.ExecuteReader();
@@ -1638,7 +1683,8 @@ namespace PriyemnayaKomissiya.View
                         SqlCommand command = new SqlCommand("Add_Atestat", connection);
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@abiturient", AbiturientID);
-                        command.Parameters.AddWithValue("@scaleName", ((ComboBox)stackPanel.Children[7]).SelectedItem);
+                        ComboBoxItem item = (ComboBoxItem)((ComboBox)stackPanel.Children[8]).SelectedItem;
+                        command.Parameters.AddWithValue("@scaleName", item.Content);
                         command.Parameters.AddWithValue("@attestatSeries", ((TextBox)stackPanel.Children[3]).Text);
                         command.Parameters.AddWithValue("@avgMarks", Math.Round(markAvg,2));
                         SqlDataReader reader = command.ExecuteReader();
@@ -2065,7 +2111,7 @@ namespace PriyemnayaKomissiya.View
                     bool error = false;
                     try
                     {
-                        SqlCommand comm = new SqlCommand($"SELECT КоличествоБаллов FROM Шкала WHERE Наименование = '{((ComboBox)stackPanel.Children[7]).SelectedItem}'", connection);
+                        SqlCommand comm = new SqlCommand($"SELECT КоличествоБаллов FROM Шкала WHERE Наименование = '{((ComboBox)stackPanel.Children[8]).SelectedItem}'", connection);
                         SqlDataReader reader = comm.ExecuteReader();
                         reader.Read();
                         int count = Convert.ToInt16(reader[0]);
