@@ -812,7 +812,7 @@
             </Setter>
             <Setter Property="TextBlock.TextAlignment" Value="Center"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Status}" Value="Отозвано">
+                <DataTrigger Binding="{Binding Status}" Value="Документы выданы">
                     <Setter Property="Foreground" Value="{StaticResource 94A1BB}"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -824,7 +824,7 @@
                     <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemyBold}"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                 </Trigger>
-                <Trigger Property="Text" Value="Отозвано">
+                <Trigger Property="Text" Value="Документы выданы">
                     <Setter Property="Foreground" Value="{StaticResource FF576B}"/>
                     <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemyBold}"/>
                     <Setter Property="FontWeight" Value="Bold"/>
@@ -1185,6 +1185,7 @@
             <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
             <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="500"/>
             <Setter Property="Foreground" Value="{StaticResource font}"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -1200,6 +1201,7 @@
                                           Focusable="false" 
                                           HorizontalAlignment="Left"
                                           Margin="20,0,0,0" 
+                                          Width="{TemplateBinding Width}"
                                           HorizontalScrollBarVisibility="Hidden" 
                                           VerticalScrollBarVisibility="Hidden" 
                                           Height="38"
@@ -1210,6 +1212,10 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#50ffffff"/>
+                    <Setter Property="BorderBrush" Value="#dfdfdf"/>
+                </Trigger>
                 <Trigger Property="Tag" Value="Error">
                     <Setter Property="BorderBrush" Value="{StaticResource FF576B}"/>
                 </Trigger>
@@ -1226,6 +1232,16 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style x:Key="TextBlockClicked" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource 94A1BB}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource font}"/>
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Application.Resources>
 </Application>

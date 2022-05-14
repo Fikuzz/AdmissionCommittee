@@ -180,5 +180,9 @@
   <ItemGroup>
     <Resource Include="Resources\Layer 3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\Elements\" />
+    <Folder Include="Controls\Forms\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
