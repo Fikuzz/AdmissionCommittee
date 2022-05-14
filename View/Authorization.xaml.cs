@@ -23,60 +23,58 @@ namespace PriyemnayaKomissiya.View
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
-        
+
         #region Войти в систему
         private void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-            if (tbPassword.Password == "priemadmin")
+            try
             {
-                string hasUser = $"SELECT IDПользователя FROM Пользователь WHERE Логин = '{tbLogin.Text}' AND IDроли = 4";
-                try
+                SqlConnection connection = new SqlConnection(connectionString);
+                if (tbPassword.Password == "priemadmin")
                 {
+                    string hasUser = $"SELECT IDПользователя, ФИО FROM Пользователь WHERE Логин = '{tbLogin.Text}' AND IDроли = 4";
                     SqlCommand command = new SqlCommand(hasUser, connection);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        MainWorkingWindow mainWorkingWindow = new MainWorkingWindow(reader.GetInt32(0), "Admin");
+                        MainWorkingWindow mainWorkingWindow = new MainWorkingWindow(reader.GetInt32(0), reader.GetString(1));
                         mainWorkingWindow.Show();
                         Close();
                         return;
                     }
                 }
-                catch
-                {
 
+                List<GroupPrincipal> result = new List<GroupPrincipal>();
+                PrincipalContext yourDomain = new PrincipalContext(ContextType.Domain);
+                if(tbLogin.Text == "")
+                {
+                    tbLogin.Tag = "Error";
+                    return;
                 }
-            }
-
-            List<GroupPrincipal> result = new List<GroupPrincipal>();
-            PrincipalContext yourDomain = new PrincipalContext(ContextType.Domain);
-            UserPrincipal user = UserPrincipal.FindByIdentity(yourDomain, tbLogin.Text);
-            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "college.local", "DC=college,DC=local", tbLogin.Text, tbPassword.Password))
-            {
-                if (pc.ValidateCredentials(tbLogin.Text, tbPassword.Password))
+                UserPrincipal user = UserPrincipal.FindByIdentity(yourDomain, tbLogin.Text);
+                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "college.local", "DC=college,DC=local", tbLogin.Text, tbPassword.Password))
                 {
-                    PrincipalSearchResult<Principal> groups = user.GetGroups();
-                    bool grpCorrect = false;
-                    foreach (GroupPrincipal g in groups)
+                    if (pc.ValidateCredentials(tbLogin.Text, tbPassword.Password))
                     {
-                        if (g.Name == groupName)
+                        PrincipalSearchResult<Principal> groups = user.GetGroups();
+                        bool grpCorrect = false;
+                        foreach (GroupPrincipal g in groups)
                         {
-                            grpCorrect = true;
+                            if (g.Name == groupName)
+                            {
+                                grpCorrect = true;
+                            }
                         }
-                    }
-                    if (grpCorrect == false)
-                    {
-                        MessageBox.Show("Невозможно получить доступ для данного пользователя.");
-                        tbPassword.Clear();
-                        tbLogin.Focus();
-                        tbLogin.SelectAll();
-                        return;
-                    }
-                    string hasUser = $"SELECT IDПользователя FROM Пользователь WHERE Логин = '{tbLogin.Text}'";
-                    try
-                    {
+                        if (grpCorrect == false)
+                        {
+                            MessageBox.Show("Возможно вы не вхоите в состав приемной комиссии.", "Доступ запрещен",MessageBoxButton.OK,MessageBoxImage.Information);
+                            tbPassword.Clear();
+                            tbLogin.Focus();
+                            tbLogin.SelectAll();
+                            return;
+                        }
+                        string hasUser = $"SELECT IDПользователя FROM Пользователь WHERE Логин = '{tbLogin.Text}'";
                         SqlCommand command = new SqlCommand(hasUser, connection);
                         connection.Open();
                         SqlDataReader reader = command.ExecuteReader();
@@ -93,7 +91,7 @@ namespace PriyemnayaKomissiya.View
                             command.CommandType = CommandType.StoredProcedure;
                             command.Parameters.AddWithValue("@login", tbLogin.Text);
                             command.Parameters.AddWithValue("@fio", user.DisplayName);
-                            command.Parameters.AddWithValue("@role", "Test");
+                            command.Parameters.AddWithValue("@role", "user");
                             reader = command.ExecuteReader();
                             reader.Read();
                             MainWorkingWindow mainWorkingWindow = new MainWorkingWindow(Convert.ToInt32(reader[0]), user.DisplayName);
@@ -101,22 +99,18 @@ namespace PriyemnayaKomissiya.View
                             Close();
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-                else
-                {
-                    tbPassword.Clear();
+                        tbPassword.Clear();
 
-                    tbPassword.Tag = "Error";
-                    tbLogin.Tag = "Error";
+                        tbPassword.Tag = "Error";
+                        tbLogin.Tag = "Error";
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не удается подключиться к сети. Проверьте сетевое подключение или обратитесь к системному администратору\n\n"+ex.Message,"Ошибка входа");
             }
         }
         #endregion
