@@ -485,7 +485,9 @@ namespace PriyemnayaKomissiya.View
                 SqlDataReader reader = command.ExecuteReader();
                 ContactDataType.Items.Clear();
                 while (reader.Read())
-                    ContactDataType.Items.Add(reader[0]);
+                {
+                    ContactDataType.Items.Add(reader.GetString(0));
+                }
                 ContactDataType.SelectedIndex = 0;
                 connection.Close();
             }
@@ -496,14 +498,21 @@ namespace PriyemnayaKomissiya.View
 
             try
             {
-                string sql = "SELECT Наименование FROM Шкала";
+                string sql = "SELECT Наименование, КоличествоБаллов FROM Шкала";
                 SqlConnection connection = new SqlConnection(connectionString);
                 SqlCommand command = new SqlCommand(sql, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 ScaleType.Items.Clear();
                 while (reader.Read())
-                    ScaleType.Items.Add(reader[0]);
+                {
+                    ComboBoxItem item = new ComboBoxItem
+                    {
+                        Content = reader.GetString(0),
+                        Tag = reader.GetInt32(1)
+                    };
+                    ScaleType.Items.Add(item);
+                }
                 ScaleType.SelectedIndex = 0;
                 connection.Close();
             }
@@ -909,7 +918,7 @@ namespace PriyemnayaKomissiya.View
         private void Abiturient_Delete(object sender, RoutedEventArgs e)
         {
             if ((AbiturientDGItem)dataDridAbiturients.SelectedItem == null) return;
-            if (MessageBox.Show($"Отметить данную запись как удаленную?\n\n  {((AbiturientDGItem)dataDridAbiturients.SelectedItem).FIO}", "Удаление", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"Отметить данную запись как отозванно?\n\n  {((AbiturientDGItem)dataDridAbiturients.SelectedItem).FIO}", "Забрать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -973,7 +982,7 @@ namespace PriyemnayaKomissiya.View
                         delItemsName += $"И еще {dataDridAbiturients.SelectedItems.Count - 3} запись(-и)";
                 }
 
-                if (MessageBox.Show($"Отметить данные записи как удаленные?\n\n {delItemsName}", "Удаление", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show($"Отметить данные записи как отозванно?\n\n {delItemsName}", "Забрать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     try
                     {
@@ -1044,9 +1053,13 @@ namespace PriyemnayaKomissiya.View
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (((TextBox)sender).Text == "")
+            {
                 ((TextBox)sender).Tag = "Error";
+            }
             else
+            {
                 ((TextBox)sender).Tag = "";
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -1130,13 +1143,19 @@ namespace PriyemnayaKomissiya.View
         private void Tb_IdentNuber_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("^[0-9a-zA-Z]+");
-            e.Handled = !regex.IsMatch(e.Text);
+            bool isMatch = regex.IsMatch(e.Text);
+            ttpIdentNum.PlacementTarget = (UIElement)sender;
+            ttpIdentNum.IsOpen = !isMatch;
+            e.Handled = !isMatch;
         }
 
         private void Tb_SeriyaPasporta_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("^[a-zA-Z]+$");
-            e.Handled = !regex.IsMatch(e.Text);
+            bool isMatch = regex.IsMatch(e.Text);
+            ttpSerya.PlacementTarget = (UIElement)sender;
+            ttpSerya.IsOpen = !isMatch;
+            e.Handled = !isMatch;
         }
         private void PassportSeriya_TextInput(object sender, TextChangedEventArgs e)
         {
@@ -1144,6 +1163,7 @@ namespace PriyemnayaKomissiya.View
             int selStart = tb.SelectionStart;
             tb.Text = tb.Text.ToUpper();
             tb.SelectionStart = selStart;
+            tb.Tag = "";
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -1180,9 +1200,9 @@ namespace PriyemnayaKomissiya.View
         {
             ((StackPanel)((Grid)((Button)sender).Parent).Parent).Visibility = Visibility.Collapsed;
         }
-        private void TextBoxCheck(TextBox textBox, ref bool correct)
+        private void TextBoxIsCorrect(TextBox textBox, ref bool correct)
         {
-            if (textBox.Text == "")
+            if (textBox.Text == "" || Convert.ToString(textBox.Tag) == "Error")
             {
                 textBox.Tag = "Error";
                 correct = false;
@@ -1203,21 +1223,18 @@ namespace PriyemnayaKomissiya.View
             {
                 ((TabItem)TabControlAddEditForm.Items[0]).Tag = "";
                 ScrollAddMain.ScrollToVerticalOffset(0);
+                MessageBox.Show("Некоторые даные были введены некорректно!");
             }
         }
         private bool Correct_1()
         {
             bool correct = true;
-            TextBoxCheck(addEditFormSurename, ref correct);
-            TextBoxCheck(addEditFormName, ref correct);
-            TextBoxCheck(addEditFormOtchestvo, ref correct);
-            TextBoxCheck(AddFormGrajdanstvo, ref correct);
-            TextBoxCheck(addEditFormShool, ref correct);
-            if (!addEditFormGraduationYear.IsMaskCompleted)
-            {
-                correct = false;
-                addEditFormGraduationYear.Tag = "Error";
-            }
+            TextBoxIsCorrect(addEditFormSurename, ref correct);
+            TextBoxIsCorrect(addEditFormName, ref correct);
+            TextBoxIsCorrect(addEditFormOtchestvo, ref correct);
+            TextBoxIsCorrect(AddFormGrajdanstvo, ref correct);
+            TextBoxIsCorrect(addEditFormShool, ref correct);
+            correct = (string)dateOfBirth.Tag != "Error" && (string)addEditFormGraduationYear.Tag != "Error";
             if (textBoxWorkPlace.Text != "" && textBoxDoljnost.Text == "")
             {
                 correct = false;
@@ -1304,8 +1321,8 @@ namespace PriyemnayaKomissiya.View
                 {
                     if (addEdifFormCT.Children[i] as StackPanel == null) break;
                     Grid grid = ((StackPanel)addEdifFormCT.Children[i]).Children[2] as Grid;
-                    TextBoxCheck((TextBox)grid.Children[1], ref correct);
-                    TextBoxCheck((TextBox)grid.Children[7], ref correct);
+                    TextBoxIsCorrect((TextBox)grid.Children[1], ref correct);
+                    TextBoxIsCorrect((TextBox)grid.Children[7], ref correct);
                     if (((Xceed.Wpf.Toolkit.MaskedTextBox)grid.Children[3]).IsMaskCompleted == false)
                     {
                         ((Xceed.Wpf.Toolkit.MaskedTextBox)grid.Children[3]).Tag = "Error";
@@ -2009,26 +2026,15 @@ namespace PriyemnayaKomissiya.View
             }
         }
         #endregion
-        private void MenuItem_Exit(object sender, RoutedEventArgs e)
-        {
-            Authorization authorization = new Authorization();
-            this.Close();
-            authorization.Show();
-        }
 
         private bool EnterIsCorrect()
         {
             //проверка заполнения паспортных данных
-            bool correct = true;
-            if (PassportDateVidachi.IsMaskCompleted == false)
-            {
-                PassportDateVidachi.Tag = "Error";
-                correct = false;
-            }
-            TextBoxCheck(PassportSeriya, ref correct);
-            TextBoxCheck(PassportNomer, ref correct);
-            TextBoxCheck(PassportVidan, ref correct);
-            TextBoxCheck(PassportIdentNum, ref correct);
+            bool correct = (string)PassportDateVidachi.Tag != "Error";
+            TextBoxIsCorrect(PassportSeriya, ref correct);
+            TextBoxIsCorrect(PassportNomer, ref correct);
+            TextBoxIsCorrect(PassportVidan, ref correct);
+            TextBoxIsCorrect(PassportIdentNum, ref correct);
             if (correct)
             {
                 ((TabItem)TabControlAddEditForm.SelectedItem).Tag = "True";
@@ -2092,6 +2098,87 @@ namespace PriyemnayaKomissiya.View
             GridDataTable.Visibility = Visibility.Hidden;
             MainGrid.Visibility = Visibility.Visible;
             Filter.Visibility = Visibility.Visible;
+        }
+
+        private void InUpperLetter(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = ((TextBox)sender);
+            if (textBox.Text.Length == 0)
+            {
+                textBox.Text = e.Text.ToUpper();
+                textBox.SelectionStart = 1;
+                e.Handled = true;
+            }
+        }
+
+        private void TextBlock_Exit(object sender, MouseButtonEventArgs e)
+        {
+            Authorization authorization = new Authorization();
+            this.Close();
+            authorization.Show();
+        }
+
+        private void ScaleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem boxItem = (ComboBoxItem)e.AddedItems[0];
+            int MaxMark = (int)boxItem.Tag;
+
+            Grid grid = (Grid)((StackPanel)((ComboBox)sender).Parent).Children[4];
+            for(int i = 3; i < grid.Children.Count; i += 2)
+            {
+                if((i-3)/2 >= MaxMark)
+                {
+                    TextBox textBox = ((TextBox)grid.Children[i + 1]);
+                    textBox.IsEnabled = false;
+                    textBox.Text = string.Empty;
+                }
+                else
+                {
+                    ((TextBox)grid.Children[i + 1]).IsEnabled = true;
+                }
+            }
+        }
+
+        private void TextBox_GetMarksSum(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            textBox.Tag = "";
+            Grid grid = (Grid)textBox.Parent;
+            int MarksCount = 0;
+            for (int i = 4; i < grid.Children.Count; i += 2)
+            {
+                if (((TextBox)grid.Children[i]).IsEnabled == false)
+                    break;
+                int x = 0;
+                if(Int32.TryParse(((TextBox)grid.Children[i]).Text, out x))
+                    MarksCount += x;
+            }
+            TextBlock textBlock = (TextBlock)((StackPanel)grid.Parent).Children[5];
+            textBlock.Text = "Общее количество отметок: " + MarksCount;
+        }
+
+        private void PassportIdentNum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((TextBox)sender).Tag = PassportIdentNum.Text.Length == 14 ? "" : "Error";
+        }
+
+        private void SetStartPosition(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            char[] arr = textBox.Text.ToCharArray();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == '_')
+                {
+                    textBox.SelectionStart = i;
+                    return;
+                }
+            }
+        }
+
+        private void ClearError(object sender, TextChangedEventArgs e)
+        {
+            ((TextBox)sender).Tag = "";
         }
     }
 } 
