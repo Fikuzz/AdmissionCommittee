@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
+using System.Drawing;
 
 namespace PriyemnayaKomissiya
 {

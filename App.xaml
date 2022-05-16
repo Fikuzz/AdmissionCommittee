@@ -764,16 +764,7 @@
         </Style>
         <!--#endregion-->
 
-        <!--#region ButtonPlanPriema | Button для плана приема-->
-        <Style x:Key="PlanPriema" TargetType="{x:Type Canvas}">
-            <Setter Property="TextElement.Foreground" Value="White"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="TextElement.Foreground" Value="LightGray"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <!--#endregion-->
+        
 
         <!--#region DataGridAbbiturients | Таблица абитуриенто -->
         <Style x:Key="dgAbbiturients" TargetType="DataGrid">
@@ -873,174 +864,11 @@
                             <Viewbox Width="34" Height="34" Margin="3" Grid.Column="1">
                                 <Grid Width="34" Height="34">
                                     <Ellipse x:Name="circle" Fill="{StaticResource 94A1BB}"/>
-                                    <TextBlock x:Name="num" HorizontalAlignment="Center" Text="1" VerticalAlignment="Center" FontSize="14" FontFamily="{StaticResource Montserrat-ExtraBold}" Foreground="White"/>
+                                    <TextBlock x:Name="num" HorizontalAlignment="Center" Text="{TemplateBinding local:TabItemThemeProperties.Number}" VerticalAlignment="Center" FontSize="14" FontFamily="{StaticResource Montserrat-ExtraBold}" Foreground="White"/>
                                     <Image x:Name="image" Margin="0,1,0,0" Source="/Resources/Vector.png" Visibility="Hidden" Width="20" Height="17"/>
                                 </Grid>
                             </Viewbox>
-                            <TextBlock Text="Основные данные об абитуриенте" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="Tag" Value="True">
-                                <Setter TargetName="num" Property="Visibility" Value="Hidden"/>
-                                <Setter TargetName="image" Property="Visibility" Value="Visible"/>
-                                <Setter Property="Foreground" Value="{StaticResource 1A95B0}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource 1A95B0}"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Foreground" Value="{StaticResource FF576B}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource FF576B}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="TabItemAdd2" TargetType="{x:Type TabItem}">
-            <Setter Property="FontFamily" Value="{StaticResource Montserrat-Bold}"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="{StaticResource 94A1BB}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Tag" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="140"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter ContentSource="Header" Grid.Column="0" HorizontalAlignment="Right"/>
-                            <Viewbox Width="34" Height="34" Margin="3" Grid.Column="1">
-                                <Grid Width="34" Height="34">
-                                    <Ellipse x:Name="circle" Fill="{StaticResource 94A1BB}"/>
-                                    <TextBlock x:Name="num" HorizontalAlignment="Center" Text="2" VerticalAlignment="Center" FontSize="14" FontFamily="{StaticResource Montserrat-ExtraBold}" Foreground="White"/>
-                                    <Image x:Name="image" Margin="0,1,0,0" Source="/Resources/Vector.png" Visibility="Hidden" Width="20" Height="17"/>
-                                </Grid>
-                            </Viewbox>
-                            <TextBlock Text="Контактные данные абитуриента" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="Tag" Value="True">
-                                <Setter TargetName="num" Property="Visibility" Value="Hidden"/>
-                                <Setter TargetName="image" Property="Visibility" Value="Visible"/>
-                                <Setter Property="Foreground" Value="{StaticResource 1A95B0}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource 1A95B0}"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Foreground" Value="{StaticResource FF576B}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource FF576B}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="TabItemAdd3" TargetType="{x:Type TabItem}">
-            <Setter Property="FontFamily" Value="{StaticResource Montserrat-Bold}"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="{StaticResource 94A1BB}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Tag" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="140"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter ContentSource="Header" Grid.Column="0" HorizontalAlignment="Right"/>
-                            <Viewbox Width="34" Height="34" Margin="3" Grid.Column="1">
-                                <Grid Width="34" Height="34">
-                                    <Ellipse x:Name="circle" Fill="{StaticResource 94A1BB}"/>
-                                    <TextBlock x:Name="num" HorizontalAlignment="Center" Text="3" VerticalAlignment="Center" FontSize="14" FontFamily="{StaticResource Montserrat-ExtraBold}" Foreground="White"/>
-                                    <Image x:Name="image" Margin="0,1,0,0" Source="/Resources/Vector.png" Visibility="Hidden" Width="20" Height="17"/>
-                                </Grid>
-                            </Viewbox>
-                            <TextBlock Text="Документы об образовании абитуриента" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="Tag" Value="True">
-                                <Setter TargetName="num" Property="Visibility" Value="Hidden"/>
-                                <Setter TargetName="image" Property="Visibility" Value="Visible"/>
-                                <Setter Property="Foreground" Value="{StaticResource 1A95B0}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource 1A95B0}"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Foreground" Value="{StaticResource FF576B}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource FF576B}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="TabItemAdd4" TargetType="{x:Type TabItem}">
-            <Setter Property="FontFamily" Value="{StaticResource Montserrat-Bold}"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="{StaticResource 94A1BB}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Tag" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="140"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter ContentSource="Header" Grid.Column="0" HorizontalAlignment="Right"/>
-                            <Viewbox Width="34" Height="34" Margin="3" Grid.Column="1">
-                                <Grid Width="34" Height="34">
-                                    <Ellipse x:Name="circle" Fill="{StaticResource 94A1BB}"/>
-                                    <TextBlock x:Name="num" HorizontalAlignment="Center" Text="4" VerticalAlignment="Center" FontSize="14" FontFamily="{StaticResource Montserrat-ExtraBold}" Foreground="White"/>
-                                    <Image x:Name="image" Margin="0,1,0,0" Source="/Resources/Vector.png" Visibility="Hidden" Width="20" Height="17"/>
-                                </Grid>
-                            </Viewbox>
-                            <TextBlock Text="Сертификаты прохождения ЦТ абитуриента" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="Tag" Value="True">
-                                <Setter TargetName="num" Property="Visibility" Value="Hidden"/>
-                                <Setter TargetName="image" Property="Visibility" Value="Visible"/>
-                                <Setter Property="Foreground" Value="{StaticResource 1A95B0}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource 1A95B0}"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Foreground" Value="{StaticResource FF576B}"/>
-                                <Setter TargetName="circle" Property="Fill" Value="{StaticResource FF576B}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="LightGray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="TabItemAdd5" TargetType="{x:Type TabItem}">
-            <Setter Property="FontFamily" Value="{StaticResource Montserrat-Bold}"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="{StaticResource 94A1BB}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Tag" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="140"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter ContentSource="Header" Grid.Column="0" HorizontalAlignment="Right"/>
-                            <Viewbox Width="34" Height="34" Margin="3" Grid.Column="1">
-                                <Grid Width="34" Height="34">
-                                    <Ellipse x:Name="circle" Fill="{StaticResource 94A1BB}"/>
-                                    <TextBlock x:Name="num" HorizontalAlignment="Center" Text="5" VerticalAlignment="Center" FontSize="14" FontFamily="{StaticResource Montserrat-ExtraBold}" Foreground="White"/>
-                                    <Image x:Name="image" Margin="0,1,0,0" Source="/Resources/Vector.png" Visibility="Hidden" Width="20" Height="17"/>
-                                </Grid>
-                            </Viewbox>
-                            <TextBlock Text="Паспортные данные абитуриента" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
+                            <TextBlock Text="{TemplateBinding local:TabItemThemeProperties.Description}" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="Tag" Value="True">
@@ -1240,6 +1068,33 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="{StaticResource font}"/>
                     <Setter Property="TextDecorations" Value="Underline"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="AdmissionPlan" TargetType="Button">
+            <Setter Property="TextElement.Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Canvas>
+                            <Rectangle x:Name="color" Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.TickBrush}"/>
+                            <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" >
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock Text="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.FundingType}" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}"/>
+                            <TextBlock TextWrapping="Wrap" Text="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.StudyType}" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}"/>
+                            <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
+                            <TextBlock Text="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.WritesCount}" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextElement.Foreground" Value="LightGray"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
