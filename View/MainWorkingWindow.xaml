@@ -263,8 +263,9 @@
                                         <Image.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="Принято" Click="Abiturient_SetStatus" Tag="0,0"/>
+                                                <MenuItem Header="Выдать документы" Click="Abiturient_IssueDocuments"/>
                                                 <Separator/>
-                                                <MenuItem Header="Забрать документы" Click="Abiturient_Delete"/>
+                                                <MenuItem Header="Удалить" Click="Abiturient_Delete"/>
                                             </ContextMenu>
                                         </Image.ContextMenu>
                                     </Image>
@@ -306,8 +307,8 @@
                     <Image Source="/PriyemnayaKomissiya;component/Resources/dots-horizontal (1).png" Margin="95,0,33,0" Width="23" Grid.Column="1" MouseLeftButtonDown="Image_MouseUp_2">
                         <Image.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Зачислить" Click="Abiturient_SetStatus" Tag="0,1"/>
                                 <MenuItem Header="Принято" Click="Abiturient_SetStatus" Tag="0,0"/>
+                                <MenuItem Header="Выдать документы" Click="Abiturient_IssueDocuments"/>
                                 <Separator/>
                                 <MenuItem Header="Удалить" Click="Abiturient_Delete"/>
                             </ContextMenu>

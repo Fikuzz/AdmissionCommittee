@@ -827,30 +827,32 @@ namespace PriyemnayaKomissiya.View
                             if (AttestatTag == "VisibleField" || AttestatTag == "HIddenField")
                             {
                                 haveAttestat = true;
-                                try
+                                ComboBox comboBox = (ComboBox)((StackPanel)addEdifFormAtestati.Children[i]).Children[8];
+                                if (comboBox.Items.Count == 0)
                                 {
-                                    ComboBox comboBox = (ComboBox)((StackPanel)addEdifFormAtestati.Children[i]).Children[8];
-                                    string sql1 = "SELECT Наименование, КоличествоБаллов FROM Шкала";
-                                    SqlConnection connection1 = new SqlConnection(connectionString);
-                                    SqlCommand command1 = new SqlCommand(sql1, connection1);
-                                    connection1.Open();
-                                    SqlDataReader reader1 = command1.ExecuteReader();
-                                    comboBox.Items.Clear();
-                                    while (reader1.Read())
+                                    try
                                     {
-                                        ComboBoxItem boxItem = new ComboBoxItem();
-                                        boxItem.Content = reader1.GetString(0);
-                                        boxItem.Tag = reader1.GetInt32(1);
-                                        comboBox.Items.Add(boxItem);
+                                        string sql1 = "SELECT Наименование, КоличествоБаллов FROM Шкала";
+                                        SqlConnection connection1 = new SqlConnection(connectionString);
+                                        SqlCommand command1 = new SqlCommand(sql1, connection1);
+                                        connection1.Open();
+                                        SqlDataReader reader1 = command1.ExecuteReader();
+                                        while (reader1.Read())
+                                        {
+                                            ComboBoxItem boxItem = new ComboBoxItem();
+                                            boxItem.Content = reader1.GetString(0);
+                                            boxItem.Tag = reader1.GetInt32(1);
+                                            comboBox.Items.Add(boxItem);
+                                        }
+                                        reader1.Close();
+                                        addEdifFormAtestati.Height += 450;
+                                        comboBox.SelectedIndex = 0;
+                                        connection1.Close();
                                     }
-                                    reader1.Close();
-                                    addEdifFormAtestati.Height += 450;
-                                    comboBox.SelectedIndex = 0;
-                                    connection1.Close();
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show(ex.Message);
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
                                 }
 
                                 StackPanel stackPanel = addEdifFormAtestati.Children[i] as StackPanel;
@@ -870,7 +872,7 @@ namespace PriyemnayaKomissiya.View
                         }
                     }
                     reader.Close();
-                    if (haveAttestat == false)
+                    if (haveAttestat == false && ScaleType.Items.Count == 0)
                     {
                         try
                         {
@@ -952,10 +954,10 @@ namespace PriyemnayaKomissiya.View
 
             dataDridAbiturients.ItemsSource = newabiturients;
         }//поиск в таблице абитуриентов
-        private void Abiturient_Delete(object sender, RoutedEventArgs e)
+        private void Abiturient_IssueDocuments(object sender, RoutedEventArgs e)
         {
             if ((AbiturientDGItem)dataDridAbiturients.SelectedItem == null) return;
-            if (MessageBox.Show($"Отметить данную запись как отозванно?\n\n  {((AbiturientDGItem)dataDridAbiturients.SelectedItem).FIO}", "Забрать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"Отметить данную запись как отозванно?\n\n  {((AbiturientDGItem)dataDridAbiturients.SelectedItem).FIO}", "Выдать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -1019,7 +1021,7 @@ namespace PriyemnayaKomissiya.View
                         delItemsName += $"И еще {dataDridAbiturients.SelectedItems.Count - 3} запись(-и)";
                 }
 
-                if (MessageBox.Show($"Отметить данные записи как отозванно?\n\n {delItemsName}", "Забрать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show($"Отметить данные записи как отозванно?\n\n {delItemsName}", "Выдать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     try
                     {
@@ -1272,13 +1274,13 @@ namespace PriyemnayaKomissiya.View
         }
         private bool Correct_1()
         {
-            bool correct = true;
+            bool correct = (string)dateOfBirth.Tag != "Error" && (string)addEditFormGraduationYear.Tag != "Error"; ;
+            TextBoxIsCorrect(addEditFormExamList, ref correct);
             TextBoxIsCorrect(addEditFormSurename, ref correct);
             TextBoxIsCorrect(addEditFormName, ref correct);
             TextBoxIsCorrect(addEditFormOtchestvo, ref correct);
             TextBoxIsCorrect(AddFormGrajdanstvo, ref correct);
             TextBoxIsCorrect(addEditFormShool, ref correct);
-            correct = (string)dateOfBirth.Tag != "Error" && (string)addEditFormGraduationYear.Tag != "Error";
             if (textBoxWorkPlace.Text != "" && textBoxDoljnost.Text == "")
             {
                 correct = false;
@@ -2225,6 +2227,29 @@ namespace PriyemnayaKomissiya.View
         private void ClearError(object sender, TextChangedEventArgs e)
         {
             ((TextBox)sender).Tag = "";
+        }
+
+        private void Abiturient_Delete(object sender, RoutedEventArgs e)
+        {
+            AbiturientDGItem abiturient = (AbiturientDGItem)dataDridAbiturients.SelectedItem;
+            MessageBoxResult acceptDeletion = MessageBox.Show("Удалить выбранную запись?\n"+ abiturient.FIO, "Удаление", MessageBoxButton.YesNo);
+            if (acceptDeletion == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    SqlConnection connection = new SqlConnection(connectionString);
+                    SqlCommand command = new SqlCommand($"DELETE FROM Абитуриент WHERE IDАбитуриента = {abiturient.ID}", connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                AbiturientsTableLoad(currentPlanPriemaID);
+                GridInfo.Visibility = Visibility.Hidden;
+            }
         }
     }
 } 
