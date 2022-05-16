@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:PriyemnayaKomissiya"
         mc:Ignorable="d"
         Title="Приемная комиссия «Полоцкий государственный экономический колледж»" Height="1000" Width="1122"
         x:Name="MainWorkingWindowForm" Loaded="MainWorkingWindow_Loaded" Background="#FFF6F7FA" SizeChanged="MainWorkingWindowForm_SizeChanged" Closed="MainWorkingWindowForm_Closed" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" MinWidth="1000">
@@ -64,7 +65,7 @@
         <Grid x:Name="MainGrid" Margin="10,32,0,0" Visibility="Visible" Grid.Column="1" Grid.Row="2">
             <Label Name="lbPlanPriema" Content="ПЛАН ПРИЁМА 2021" HorizontalAlignment="Left" Margin="39,13,0,0" VerticalAlignment="Top" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Foreground="#FF76829B" Height="26" Width="382"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,44,0,0">
-                <Grid Grid.Column="2" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="grdAdmissionPlans" Grid.Column="2" RenderTransformOrigin="0.5,0.5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="240"/>
@@ -80,114 +81,6 @@
                         <ColumnDefinition Width="382*" MinWidth="340" MaxWidth="420"/>
                         <ColumnDefinition Width="382*" MinWidth="340" MaxWidth="420"/>
                     </Grid.ColumnDefinitions>
-                    <Canvas Style="{DynamicResource PlanPriema}" Tag="1" x:Name="BlockPlana1" MouseDown="Canvas_MouseDown" Margin="1,0,77,32" Grid.Row="1" Grid.Column="1">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF1A95B0"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" >
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Name="AdmissionPlan_Text1" Text="" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}"/>
-                        <TextBlock Name="AdmissionPlan_Text2" TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Name="AdmissionPlan_Count" Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana2" Margin="0,0,77,32" Grid.Column="2" Grid.Row="1" MouseDown="Canvas_MouseDown">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF44A6D4"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}"/>
-                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana3" Margin="1,0,75,32" Grid.Row="1" Grid.Column="3" MouseDown="Canvas_MouseDown">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FFFF576B"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
-                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana4" MouseDown="Canvas_MouseDown" Margin="0,0,77,32" Grid.Row="1" Grid.Column="4" >
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF1E8D4B"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
-                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana5" Margin="0,0,77,32" Grid.Column="1" Grid.Row="2" MouseDown="Canvas_MouseDown">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FFDC8833"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
-                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana6" Margin="1,0,75,32" Grid.Row="2" Grid.Column="2" MouseDown="Canvas_MouseDown">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF5D4FEC"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
-                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana7" MouseDown="Canvas_MouseDown" Margin="0,0,77,32" Grid.Row="2" Grid.Column="3">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF81176E"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
-                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana8" Margin="0,0,77,32" Grid.Column="4" Grid.Row="2" MouseDown="Canvas_MouseDown">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF3A3A3A"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="/PriyemnayaKomissiya;component/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="ДНЕВНАЯ" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" />
-                        <TextBlock TextWrapping="Wrap" Text="БЮДЖЕТ. На основе базового образования" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="12" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
-                    <Canvas Style="{DynamicResource PlanPriema}" x:Name="BlockPlana9" Margin="1,0,75,32" Grid.Row="3" Grid.Column="1" MouseDown="Canvas_MouseDown">
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20" Fill="#FF6C4646"/>
-                        <Rectangle Width="306" Height="208" RadiusY="20" RadiusX="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="pack://application:,,,/Resources/brandi-redd-aJTiW00qqtI-unsplash 1.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}" Width="241" />
-                        <TextBlock TextWrapping="Wrap" Text="" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}" />
-                        <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
-                        <TextBlock Text="" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
-                    </Canvas>
                 </Grid>
             </ScrollViewer>
         </Grid>
@@ -564,7 +457,7 @@
                         <ColumnDefinition Width="12"/>
                     </Grid.ColumnDefinitions>
                     <TabControl Name="TabControlAddEditForm" BorderThickness="0" TabStripPlacement="Left" Background="{x:Null}" Grid.ColumnSpan="4" Margin="0,0,-0.491,0" Grid.Column="1" SelectionChanged="TabControlAddEditForm_SelectionChanged">
-                        <TabItem Header="ОСНОВНОЕ" Style="{DynamicResource TabItemAdd}" Padding="8,2,6,2" VerticalContentAlignment="Top" Margin="0,10,0,-10">
+                        <TabItem Header="ОСНОВНОЕ" local:TabItemThemeProperties.Description="Основные данные об абитуриенте" local:TabItemThemeProperties.Number="1" Style="{DynamicResource TabItemAdd}" Padding="8,2,6,2" VerticalContentAlignment="Top" Margin="0,10,0,-10">
                             <Grid Margin="-1,0,0,0">
                             <ScrollViewer Name="ScrollAddMain" Foreground="{StaticResource font}" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" Margin="10">
                                 <StackPanel x:Name="AddEditMainData" Width="502" VerticalAlignment="Top" >
@@ -631,7 +524,7 @@
                             </ScrollViewer>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="КОНТАКТЫ" Style="{DynamicResource TabItemAdd2}" UseLayoutRounding="True" Margin="0,20,0,-20" >
+                        <TabItem Header="КОНТАКТЫ" local:TabItemThemeProperties.Description="Контактные данные абитуриента" local:TabItemThemeProperties.Number="2" Style="{DynamicResource TabItemAdd}" UseLayoutRounding="True" Margin="0,20,0,-20" >
                             <Grid >
                                 <ScrollViewer x:Name="ScrollAddContacts" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
                                 <StackPanel x:Name="AddEditFormContacts" VerticalAlignment="Top" >
@@ -749,7 +642,7 @@
                             </ScrollViewer>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="ОБРАЗОВАНИЕ" Style="{DynamicResource TabItemAdd3}" Margin="0,30,0,-30">
+                        <TabItem Header="ОБРАЗОВАНИЕ" local:TabItemThemeProperties.Description="Документы об образовании абитуриента" local:TabItemThemeProperties.Number="3" Style="{DynamicResource TabItemAdd}" Margin="0,30,0,-30">
                             <Grid Margin="2,0,0,0">
                                 <ScrollViewer x:Name="ScrollAddAtestats" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
                                 <StackPanel x:Name="addEdifFormAtestati" VerticalAlignment="Top" Width="833" >
@@ -959,7 +852,7 @@
                             </ScrollViewer>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="СЕРТИФИКАТ" Name="TabItemSertificat" Style="{DynamicResource TabItemAdd4}" Margin="0,40,0,-40" >
+                        <TabItem Header="СЕРТИФИКАТ" local:TabItemThemeProperties.Description="Сертификаты прохождения ЦТ Абитуриента" local:TabItemThemeProperties.Number="4" Name="TabItemSertificat" Style="{DynamicResource TabItemAdd}" Margin="0,40,0,-40" >
                             <Grid>
                                 <ScrollViewer x:Name="ScrollAddCT" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" Margin="10,0,0,0">
                                 <StackPanel x:Name="addEdifFormCT" VerticalAlignment="Top" >
@@ -1137,7 +1030,7 @@
                             </ScrollViewer>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="ПАСПОРТ" Style="{DynamicResource TabItemAdd5}" Margin="0,50,0,-50" >
+                        <TabItem Header="ПАСПОРТ" local:TabItemThemeProperties.Description="Паспортные данные абитуриента" local:TabItemThemeProperties.Number="5" Style="{DynamicResource TabItemAdd}" Margin="0,50,0,-50" >
                             <Grid >
                                 <ScrollViewer x:Name="ScrollAddPassport" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
                                     <StackPanel Name="AddEditFormPassport" VerticalAlignment="Top" Width="506">

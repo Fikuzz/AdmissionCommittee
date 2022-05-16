@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace PriyemnayaKomissiya.View
 {
@@ -18,7 +20,7 @@ namespace PriyemnayaKomissiya.View
         int currentPlanPriemaID = 0;
         private readonly int userId;
         private int planPriemaColumn = 0;
-        private readonly List<Canvas> planPriemaButtons = new List<Canvas>();
+        private readonly List<Button> planPriemaButtons = new List<Button>();
         private readonly string connectionString;
         List<AbiturientDGItem> abiturients = null;
         public MainWorkingWindow(int idUser, string FIOUser)
@@ -27,17 +29,7 @@ namespace PriyemnayaKomissiya.View
             userId = idUser;
             lUser_FIO.Text = FIOUser;
             connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            {
-                planPriemaButtons.Add(BlockPlana1);
-                planPriemaButtons.Add(BlockPlana2);
-                planPriemaButtons.Add(BlockPlana3);
-                planPriemaButtons.Add(BlockPlana4);
-                planPriemaButtons.Add(BlockPlana5);
-                planPriemaButtons.Add(BlockPlana6);
-                planPriemaButtons.Add(BlockPlana7);
-                planPriemaButtons.Add(BlockPlana8);
-                planPriemaButtons.Add(BlockPlana9);
-            }
+
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
             var path = System.IO.Path.GetDirectoryName(location);
             try {
@@ -85,17 +77,7 @@ namespace PriyemnayaKomissiya.View
         {
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            {
-                planPriemaButtons.Add(BlockPlana1);
-                planPriemaButtons.Add(BlockPlana2);
-                planPriemaButtons.Add(BlockPlana3);
-                planPriemaButtons.Add(BlockPlana4);
-                planPriemaButtons.Add(BlockPlana5);
-                planPriemaButtons.Add(BlockPlana6);
-                planPriemaButtons.Add(BlockPlana7);
-                planPriemaButtons.Add(BlockPlana8);
-                planPriemaButtons.Add(BlockPlana9);
-            }
+
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
             var path = System.IO.Path.GetDirectoryName(location);
 
@@ -257,12 +239,11 @@ namespace PriyemnayaKomissiya.View
         #region Форма планов приема
         private void PlaniPriemaLoad(string specialost)
         {
-            foreach (Canvas canvas in planPriemaButtons)
-            {
-                canvas.Visibility = Visibility.Hidden;
-            }
+            Brush[] colors = { new SolidColorBrush(Color.FromRgb(255,87, 107)), new SolidColorBrush(Color.FromRgb(26, 149, 176)), new SolidColorBrush(Color.FromRgb(68, 166, 212)), new SolidColorBrush(Color.FromRgb(220, 136, 51)), new SolidColorBrush(Color.FromRgb(93, 79, 236)) };
+            int i = 0;
+            planPriemaButtons.Clear();
+            grdAdmissionPlans.Children.Clear();
 
-            int buttInd = 0;
             try
             {
                 SqlConnection connection = new SqlConnection(connectionString);
@@ -279,15 +260,23 @@ namespace PriyemnayaKomissiya.View
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Canvas canvas = planPriemaButtons[buttInd];
-                    canvas.Tag = reader[5];
-                    canvas.Visibility = Visibility.Visible;
-                    canvas.Children[2].SetValue(TextBlock.TextProperty, reader[3].ToString().ToUpper());
-                    canvas.Children[3].SetValue(TextBlock.TextProperty, reader[2].ToString().ToUpper() + ". " + reader[4]);
-                    canvas.Children[5].SetValue(TextBlock.TextProperty, reader[6].ToString());
-                    canvas.Children[2].SetValue(TextBlock.TagProperty, reader[3].ToString() + ". " + reader[2].ToString() + ". " + reader[4].ToString());
-                    buttInd++;
+                    Button button = new Button()
+                    {
+                        Style = (Style)FindResource("AdmissionPlan"),
+                    };
+                    button.Click += Canvas_MouseDown;
+                    planPriemaButtons.Add(button);
+                    button.Tag = reader[5];
+                    ButtonAdmissionPlanThemeProperties.SetFundingType(button, reader.GetString(3).ToUpper());
+                    ButtonAdmissionPlanThemeProperties.SetStudyType(button, reader.GetString(2) + ". " + reader.GetString(4));
+                    ButtonAdmissionPlanThemeProperties.SetWritesCount(button, reader.GetInt32(6).ToString());
+                    ButtonAdmissionPlanThemeProperties.SetTickBrush(button, colors[i]);
+                    grdAdmissionPlans.Children.Add(button);
+                    i++;
+                    if (i == 4) i = 0;
                 }
+                planPriemaColumn = 0;
+                MainWorkingWindowForm_SizeChanged(null, null);
                 connection.Close();
             }
             catch (Exception ex)
@@ -295,12 +284,12 @@ namespace PriyemnayaKomissiya.View
                 MessageBox.Show(ex.Message);
             }
         }
-        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Canvas_MouseDown(object sender, RoutedEventArgs e)
         {
             try
             {
-                LabelFormaObrazovaniya.Content = ((Canvas)sender).Children[2].GetValue(TagProperty);
-                currentPlanPriemaID = Convert.ToInt32(((Canvas)sender).Tag);
+                LabelFormaObrazovaniya.Content = ButtonAdmissionPlanThemeProperties.GetFundingType((Button)sender) + ". " + ButtonAdmissionPlanThemeProperties.GetStudyType((Button)sender);
+                currentPlanPriemaID = Convert.ToInt32(((Button)sender).Tag);
                 AbiturientsTableLoad(currentPlanPriemaID);
             }
             catch (Exception ex)
