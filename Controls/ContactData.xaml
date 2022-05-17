@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="PriyemnayaKomissiya.Controls.ContactData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PriyemnayaKomissiya.Controls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="270" d:DesignWidth="800">
+    <StackPanel Tag="VisibleField" Height="270" Background="#FFF3F4F8">
+        <Grid MinHeight="30" Height="29">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="tbHeader" Text="КОНТАКТНЫЕ ДАННЫЕ 01" Foreground="{StaticResource 94A1BB}" Margin="0,10,10,0"/>
+            <Button x:Name="btClose" Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+        </Grid>
+        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+        <TextBlock Text="ТИП КОНТАКТА" Margin="10,25,0,10" Width="502"/>
+        <ComboBox x:Name="cbContactType" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="502" SelectionChanged="ComboBox_SelectionChanged"/>
+        <TextBlock Text="СВЕДЕНИЯ" Margin="10,25,0,10" Width="502"/>
+        <xctk:MaskedTextBox x:Name="mtbData" Style="{DynamicResource TextBox}" TextChanged="TextBox_TextChanged" Width="502" PreviewTextInput="SetStartPosition"/>
+    </StackPanel>
+</UserControl>
