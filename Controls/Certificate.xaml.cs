@@ -20,86 +20,14 @@ namespace PriyemnayaKomissiya.Controls
 	/// <summary>
 	/// Логика взаимодействия для Certificate.xaml
 	/// </summary>
-	public partial class Certificate : UserControl
+	public partial class Certificate : UserControl, IDataForm
 	{
 		public List<TextBox> Marks = new List<TextBox>();
 		private readonly string connectionString;
 		public Certificate(Visibility ButtonClose, int Num)
 		{
 			InitializeComponent();
-
-			btClose.Visibility = ButtonClose;
-			tblHeader.Text = "ОБРАЗОВАНИЕ АБИТУРИЕНТА " + (Num / 10 < 1 ? "0" : "") + Num;
 			connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-		}
-
-		private void Button_CloseNote(object sender, RoutedEventArgs e)
-		{
-			Panel panel = this.Parent as Panel;
-			panel.Children.Remove(this);
-			panel.Tag = (int)panel.Tag - 1;
-		}
-
-		public bool Validate()
-		{
-			if (tbSeries.Text == "")
-			{
-				tbSeries.Tag = "Error";
-				return false;
-			}
-			else
-			{
-				tbSeries.Tag = "";
-				return true;
-			}
-		}
-
-		private void ClearError(object sender, TextChangedEventArgs e)
-		{
-			PLib.ClearError(sender);
-		}
-
-		private void TextBox_GetMarksSum(object sender, TextChangedEventArgs e)
-		{
-			TextBox textBox = (TextBox)sender;
-			textBox.Tag = "";
-
-			int MarksCount = 0;
-			foreach (TextBox tb in Marks)
-			{
-				if (tb.IsEnabled == false)
-					break;
-				if (int.TryParse(tb.Text, out int x))
-					MarksCount += x;
-			}
-			tblTotalMarks.Text = "Общее количество отметок: " + MarksCount;
-		}
-		private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-		{
-			e.Handled = !PLib.IsTextAllowed(e.Text);
-		}
-
-		private void ScaleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			ComboBoxItem boxItem = (ComboBoxItem)e.AddedItems[0];
-			int MaxMark = (int)boxItem.Tag;
-
-			for (int i = 0; i < Marks.Count; i++)
-			{
-				if (i >= MaxMark)
-				{
-					Marks[i].IsEnabled = false;
-					Marks[i].Text = string.Empty;
-				}
-				else
-				{
-					Marks[i].IsEnabled = true;
-				}
-			}
-		}
-
-		private void UserControl_Loaded(object sender, RoutedEventArgs e)
-		{
 			try
 			{
 				string sql = "SELECT Наименование, КоличествоБаллов FROM Шкала";
@@ -146,6 +74,85 @@ namespace PriyemnayaKomissiya.Controls
 					Marks[i].IsEnabled = true;
 				}
 			}
+
+			btClose.Visibility = ButtonClose;
+			tblHeader.Text = "ОБРАЗОВАНИЕ АБИТУРИЕНТА " + (Num / 10 < 1 ? "0" : "") + Num;
+		}
+
+		private void Button_CloseNote(object sender, RoutedEventArgs e)
+		{
+			Panel panel = this.Parent as Panel;
+			panel.Children.Remove(this);
+			panel.Tag = (int)panel.Tag - 1;
+		}
+
+		public bool Validate()
+		{
+			bool result = true;
+			PLib.CorrectData(tbSeries, ref result);
+
+            int count = (int)((ComboBoxItem)cbScaleType.SelectedItem).Tag;
+            for (int j = 0; j < Marks.Count; j++)
+            {
+                if ((Marks[j].Text == "" && count > j) ||
+                (Marks[j].Text != "" && count <= j))
+                {
+					result = false;
+                    Marks[j].Tag = "Error";
+                }
+            }
+
+            return result;
+		}
+
+		private void ClearError(object sender, TextChangedEventArgs e)
+		{
+			PLib.ClearError(sender);
+		}
+
+		private void TextBox_GetMarksSum(object sender, TextChangedEventArgs e)
+		{
+			TextBox textBox = (TextBox)sender;
+			textBox.Tag = "";
+
+			int MarksCount = 0;
+			foreach (TextBox tb in Marks)
+			{
+				if (tb.IsEnabled == false)
+					break;
+				if (int.TryParse(tb.Text, out int x))
+					MarksCount += x;
+			}
+			tblTotalMarks.Text = "Общее количество отметок: " + MarksCount;
+		}
+		private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+		{
+			e.Handled = !PLib.IsTextAllowed(e.Text);
+		}
+
+		private void ScaleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			ComboBoxItem boxItem = (ComboBoxItem)e.AddedItems[0];
+			int MaxMark = (int)boxItem.Tag;
+
+			for (int i = 0; i < Marks.Count; i++)
+			{
+				if (i >= MaxMark)
+				{
+					Marks[i].IsEnabled = false;
+					Marks[i].Text = string.Empty;
+					Marks[i].Tag = "";
+				}
+				else
+				{
+					Marks[i].IsEnabled = true;
+				}
+			}
+		}
+
+		private void UserControl_Loaded(object sender, RoutedEventArgs e)
+		{
+			
 		}
 	}
 }
