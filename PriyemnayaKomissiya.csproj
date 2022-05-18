@@ -95,6 +95,19 @@
     </ApplicationDefinition>
     <Compile Include="AbiturientDGItem.cs" />
     <Compile Include="ButtonAdmissionPlanThemeProperties.cs" />
+    <Compile Include="Controls\Certificate.xaml.cs">
+      <DependentUpon>Certificate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ContactData.xaml.cs">
+      <DependentUpon>ContactData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CtCertificate.xaml.cs">
+      <DependentUpon>CtCertificate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IDataForm.cs" />
+    <Compile Include="DB.cs" />
+    <Compile Include="PlanPriema.cs" />
+    <Compile Include="PLib.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,6 +124,18 @@
     <Compile Include="View\MainWorkingWindow.xaml.cs">
       <DependentUpon>MainWorkingWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\Certificate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ContactData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CtCertificate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,10 +222,7 @@
   <ItemGroup>
     <Resource Include="Resources\Layer 3.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\Elements\" />
-    <Folder Include="Controls\Forms\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
