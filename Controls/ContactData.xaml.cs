@@ -20,7 +20,7 @@ namespace PriyemnayaKomissiya.Controls
     /// <summary>
     /// Логика взаимодействия для ContactData.xaml
     /// </summary>
-    public partial class ContactData : UserControl
+    public partial class ContactData : UserControl, IDataForm
     {
         private readonly string connectionString;
         
@@ -84,16 +84,9 @@ namespace PriyemnayaKomissiya.Controls
 
         public bool Validate()
         {
-            if (mtbData.IsMaskCompleted == false || mtbData.Text == "")
-            {
-                mtbData.Tag = "Error";
-                return false;
-            }
-            else
-            {
-                mtbData.Tag = "";
-                return true;
-            }
+            bool result = true;
+            PLib.CorrectData(mtbData, ref result);
+            return result;
         }
     }
 }
