@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="PriyemnayaKomissiya.Controls.CtCertificate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PriyemnayaKomissiya.Controls" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="315" d:DesignWidth="803">
+    <StackPanel Visibility="Visible" Tag="HIddenField" Background="#FFF3F4F8">
+        <Grid MinHeight="30" Height="29">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="СЕРТИФИКАТ ЦТ 02" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+            <Button x:Name="btClose" Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
+        </Grid>
+        <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
+        <Grid Margin="0,10,0,0" Height="230" Width="501">
+            <TextBlock Text="НОМЕР СЕРИИ" Margin="10,0,251,211"/>
+            <TextBox x:Name="tbSeries" Style="{DynamicResource TextBox}" TextChanged="ClearError" Margin="0,19,251,175" Height="36" PreviewTextInput="TextBox_PreviewTextInput" Width="Auto"/>
+            <TextBlock Text="ГОД ПРОХОЖДЕНИЯ" Margin="267,0,0,211"/>
+            <xctk:MaskedTextBox x:Name="mtbYear" Mask="0000" Style="{DynamicResource TextBox}" Margin="256,19,1,175" Height="36" TextChanged="ClearError" PreviewTextInput="SetStartPosition" Width="Auto"/>
+            <TextBlock Text="ПРЕДМЕТ" Margin="10,73,10,139"/>
+            <ComboBox x:Name="cbDisciplin" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Margin="0,96">
+                <ComboBoxItem Content="Русский язык"/>
+                <ComboBoxItem Content="Белорусский язык"/>
+                <ComboBoxItem Content="Иностранный язык"/>
+                <ComboBoxItem Content="Математика"/>
+                <ComboBoxItem Content="Обществоведение"/>
+                <ComboBoxItem Content="Биология"/>
+                <ComboBoxItem Content="Химия"/>
+                <ComboBoxItem Content="Физика"/>
+                <ComboBoxItem Content="Всемирная история"/>
+                <ComboBoxItem Content="История Беларуси"/>
+                <ComboBoxItem Content="География"/>
+            </ComboBox>
+            <TextBlock Text="БАЛЛ ЦТ" Margin="10,155,0,56"/>
+            <TextBox x:Name="tbScore" Style="{DynamicResource TextBox}" TextChanged="ScoreTextInput" Margin="0,179,0,15" Height="36" PreviewTextInput="TextBox_PreviewTextInput"/>
+        </Grid>
+    </StackPanel>
+</UserControl>
