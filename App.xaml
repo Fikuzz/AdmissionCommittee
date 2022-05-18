@@ -868,7 +868,7 @@
                                     <Image x:Name="image" Margin="0,1,0,0" Source="/Resources/Vector.png" Visibility="Hidden" Width="20" Height="17"/>
                                 </Grid>
                             </Viewbox>
-                            <TextBlock Text="{TemplateBinding local:TabItemThemeProperties.Description}" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
+                            <TextBlock x:Name="Discription" Text="{TemplateBinding local:TabItemThemeProperties.Description}" TextAlignment="Right" VerticalAlignment="Top" Margin="0,15,0,0" FontFamily="{StaticResource Montserrat-Regular}" FontSize="11" Foreground="{StaticResource font}" TextWrapping="Wrap" FontWeight="Normal"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="Tag" Value="True">
@@ -880,6 +880,11 @@
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Foreground" Value="{StaticResource FF576B}"/>
                                 <Setter TargetName="circle" Property="Fill" Value="{StaticResource FF576B}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="LightGray"/>
+                                <Setter TargetName="Discription" Property="Foreground" Value="LightGray"/>
+                                <Setter TargetName="circle" Property="Fill" Value="LightGray"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
