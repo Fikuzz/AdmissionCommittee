@@ -54,7 +54,7 @@ namespace PriyemnayaKomissiya
         public static void CorrectData(object value, ref bool result)
         {
             if(value is Xceed.Wpf.Toolkit.MaskedTextBox textBox){
-                if(textBox.IsMaskCompleted == false || textBox.Tag == "Error")
+                if(textBox.IsMaskCompleted == false || (string)textBox.Tag == "Error")
                 {
                     result = false;
                     textBox.Tag = "Error";
@@ -62,7 +62,7 @@ namespace PriyemnayaKomissiya
             }
             else if(value is TextBox tb)
             {
-                if(tb.Text == "" || tb.Tag == "Error")
+                if(tb.Text == "" || (string)tb.Tag == "Error")
                 {
                     result = false;
                     tb.Tag = "Error";

@@ -366,6 +366,9 @@ namespace PriyemnayaKomissiya.View
             Certificate certificate = new Certificate(Visibility.Hidden, 1);
             addEdifFormAtestati.Children.Insert(0, certificate);
             addEdifFormAtestati.Tag = 1;
+
+            addEdifFormCT.Children.RemoveRange(0, (int)addEdifFormCT.Tag);
+            addEdifFormCT.Tag = 0;
         }
         private void AbiturientInfoShow()
         {
