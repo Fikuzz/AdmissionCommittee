@@ -25,7 +25,7 @@ namespace PriyemnayaKomissiya.Controls
         public CtCertificate(int Num)
         {
             InitializeComponent();
-
+            tbTitle.Text = "СЕРТИФИКАТ ЦТ " + Num;
             connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 

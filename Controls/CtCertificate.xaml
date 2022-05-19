@@ -12,7 +12,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="СЕРТИФИКАТ ЦТ 02" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
+            <TextBlock x:Name="tbTitle" Text="СЕРТИФИКАТ ЦТ 02" VerticalAlignment="Center" Foreground="{StaticResource 94A1BB}"/>
             <Button x:Name="btClose" Click="Button_CloseNote" Grid.Column="1" Style="{DynamicResource Button_Close}"/>
         </Grid>
         <Line X1="0" Y1="0" X2="2000" Y2="0" Height="10" Stroke="{StaticResource 94A1BB}"/>
