@@ -156,7 +156,7 @@
                                     <Image Margin="10,0,0,0" Source="/PriyemnayaKomissiya;component/Resources/dots-horizontal.png" MouseUp="Image_MouseUp_2">
                                         <Image.ContextMenu>
                                             <ContextMenu>
-                                                <MenuItem Header="Принято" Click="Abiturient_SetStatus" Tag="0,0"/>
+                                                <MenuItem Header="Принять документы" Click="Abiturient_SetStatus" Tag="0,0"/>
                                                 <MenuItem Header="Выдать документы" Click="Abiturient_IssueDocuments"/>
                                                 <Separator/>
                                                 <MenuItem Header="Удалить" Click="Abiturient_Delete"/>
@@ -449,7 +449,7 @@
         </Grid>
         <!--#endregion-->
         <!--#region форма добавления/редактирования записей-->
-                <Grid Visibility="Visible" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
+                <Grid Visibility="Hidden" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="93"/>
                         <ColumnDefinition Width="141*"/>
@@ -528,9 +528,9 @@
                         <TabItem Header="КОНТАКТЫ" local:TabItemThemeProperties.Description="Контактные данные абитуриента" local:TabItemThemeProperties.Number="2" Style="{DynamicResource TabItemAdd}" UseLayoutRounding="True" Margin="0,20,0,-20" >
                             <Grid >
                                 <ScrollViewer x:Name="ScrollAddContacts" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
-                                <StackPanel x:Name="AddEditFormContacts" VerticalAlignment="Top" >
+                                <StackPanel x:Name="AddEditFormContacts" VerticalAlignment="Top" Width="650" >
                                     
-                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="115,25,115,0" Content="ДОБАВИТЬ КОНТАКТ" Width="502" Click="Button_Click_1"/>
+                                    <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="0,25,0,0" Content="ДОБАВИТЬ КОНТАКТ" Width="502" Click="Button_Click_1"/>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="500">
                                         <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Foreground="{StaticResource 94A1BB}" Background="#3376829B" Height="53" Margin="0,25,0,0" Content="ПРЕДЫДУЩИЙ ЭТАП" Width="235" Click="Button_PrewPage"/>
                                         <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="30,25,0,0" Content="СЛЕДУЮЩИЙ ЭТАП" Width="235" Click="Button_NextStep_2"/>
@@ -544,7 +544,7 @@
                                 <ScrollViewer x:Name="ScrollAddAtestats" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}">
                                 <StackPanel x:Name="addEdifFormAtestati" VerticalAlignment="Top" Width="833" >
                                      
-                                <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="294,25,293,0" Content="ДОБАВИТЬ ДОКУМЕНТ" Click="Button_NewAtestat"/>
+                                <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="166,25,167,0" Content="ДОБАВИТЬ ДОКУМЕНТ" Click="Button_NewAtestat"/>
                                 <StackPanel Orientation="Horizontal" Width="500" Height="88" Margin="166,0,167,0">
                                     <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Foreground="{StaticResource 94A1BB}" Background="#3376829B" Height="53" Margin="0,10,0,0" Content="ПРЕДЫДУЩИЙ ЭТАП" Width="235" Click="Button_PrewPage"/>
                                     <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="30,10,0,0" Content="СЛЕДУЮЩИЙ ЭТАП" Width="235" Click="Button_NextStep_3"/>
@@ -556,9 +556,9 @@
                         <TabItem Header="СЕРТИФИКАТ" local:TabItemThemeProperties.Description="Сертификаты прохождения ЦТ Абитуриента" local:TabItemThemeProperties.Number="4" Name="TabItemSertificat" Style="{DynamicResource TabItemAdd}" Margin="0,40,0,-40" >
                             <Grid>
                                 <ScrollViewer x:Name="ScrollAddCT" Foreground="{StaticResource font}" VerticalScrollBarVisibility="Visible" FontWeight="Normal" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}" Margin="10,0,0,0">
-                                <StackPanel x:Name="addEdifFormCT" VerticalAlignment="Top" >
+                                <StackPanel x:Name="addEdifFormCT" VerticalAlignment="Top" Width="650">
 
-                                <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="115,25,115,0" Content="ДОБАВИТЬ ДОКУМЕНТ" Width="502" Click="ButtonNewSertificatCT"/>
+                                <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Background="{StaticResource 1A95B0}" Height="53" Margin="0,25,0,0" Content="ДОБАВИТЬ ДОКУМЕНТ" Width="502" Click="ButtonNewSertificatCT"/>
                                 <StackPanel Orientation="Horizontal" Width="501">
                                     <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Foreground="{StaticResource 94A1BB}" Background="#3376829B" Height="53" Margin="0,25,0,0" Content="ПРЕДЫДУЩИЙ ЭТАП" Width="235" Click="Button_PrewPage"/>
                                     <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="30,25,0,0" Content="СЛЕДУЮЩИЙ ЭТАП" Width="235" Click="Button_NextStep_4"/>
