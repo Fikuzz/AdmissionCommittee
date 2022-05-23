@@ -111,21 +111,22 @@ namespace PriyemnayaKomissiya.Controls
 		}
 
 		private void TextBox_GetMarksSum(object sender, TextChangedEventArgs e)
-		{
-			TextBox textBox = (TextBox)sender;
-			textBox.Tag = "";
+        {
+			if (Marks.Count == 0) return;
+            TextBox textBox = (TextBox)sender;
+            textBox.Tag = "";
 
-			int MarksCount = 0;
-			foreach (TextBox tb in Marks)
-			{
-				if (tb.IsEnabled == false)
-					break;
-				if (int.TryParse(tb.Text, out int x))
-					MarksCount += x;
-			}
-			tblTotalMarks.Text = "Общее количество отметок: " + MarksCount;
-		}
-		private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+            int MarksCount = 0;
+            foreach (TextBox tb in Marks)
+            {
+                if (tb.IsEnabled == false)
+                    break;
+                if (int.TryParse(tb.Text, out int x))
+                    MarksCount += x;
+            }
+            tblTotalMarks.Text = "Общее количество отметок: " + MarksCount;
+        }
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
 		{
 			e.Handled = !PLib.IsTextAllowed(e.Text);
 		}
@@ -146,13 +147,14 @@ namespace PriyemnayaKomissiya.Controls
 				else
 				{
 					Marks[i].IsEnabled = true;
+					Marks[i].Text = "0";
 				}
 			}
 		}
 
-		private void UserControl_Loaded(object sender, RoutedEventArgs e)
-		{
-			
-		}
-	}
+        private void TextBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+			(sender as TextBox).SelectAll();
+        }
+    }
 }
