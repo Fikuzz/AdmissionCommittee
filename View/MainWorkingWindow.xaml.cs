@@ -317,7 +317,7 @@ namespace PriyemnayaKomissiya.View
                     additional = "х/р";
                 else if (addEditFormobrazovanie.SelectedValue != null && addEditFormobrazovanie.SelectedValue.ToString() == "На основе среднего образования")
                     additional = "с";
-                addEditFormExamList.Text = letter + num + additional;
+                addEditFormExamList.Text = letter + additional + num;
             }
             catch (Exception ex)
             {
@@ -326,6 +326,7 @@ namespace PriyemnayaKomissiya.View
         }
         private void Button_Click(object sender, RoutedEventArgs e) //открытие формы добавления
         { //TODO: Очищать сертификаты цт
+            ScrollAddMain.ScrollToHome();
             PlanPriema temp = curentPlanPriema.Clone();
 
             AddEndButton.Visibility = Visibility.Visible;
@@ -517,6 +518,9 @@ namespace PriyemnayaKomissiya.View
         }
         private void Image_MouseUp_1(object sender, MouseButtonEventArgs e)
         {
+            PlanPriema temp = curentPlanPriema.Clone();
+
+            ScrollAddMain.ScrollToHome();
             GridInfo.Visibility = Visibility.Hidden;
             AddEndButton.Visibility = Visibility.Collapsed;
             EditEndButton.Visibility = Visibility.Visible;
@@ -535,16 +539,17 @@ namespace PriyemnayaKomissiya.View
                 ClearData<StackPanel>(AddEditFormPassport);
                 
                 List<string> spec = DB.Get_SpecialnostiName(true);
+                addEditFormspecialnost.SelectedItem = -1;
+                addEditFormspecialnost.Items.Clear();
                 foreach (string name in spec)
                 {
                     addEditFormspecialnost.Items.Add(name);
                 }
 
-                addEditFormspecialnost.SelectedIndex = TabControl.SelectedIndex;
-                string[] dataFormiObucheniya = LabelFormaObrazovaniya.Content.ToString().Split('.');
-                addEditFormobushenie.SelectedItem = dataFormiObucheniya[0];
-                addEditFormFinansirovanie.SelectedItem = dataFormiObucheniya[1].Substring(1);
-                addEditFormobrazovanie.SelectedItem = dataFormiObucheniya[2].Substring(1);
+                addEditFormspecialnost.SelectedItem = temp.NameSpec;
+                addEditFormobushenie.SelectedItem = temp.NameForm;
+                addEditFormFinansirovanie.SelectedItem = temp.NameFinance;
+                addEditFormobrazovanie.SelectedItem = temp.NameObrazovaie;
                 //Запись данных
                 try
                 {
@@ -653,8 +658,16 @@ namespace PriyemnayaKomissiya.View
                         addEdifFormAtestati.Tag = (int)addEdifFormAtestati.Tag + 1;
 
                         certificate.tbSeries.Text = reader.GetString(reader.GetOrdinal("Num"));
-                        certificate.cbScaleType.SelectedItem = reader.GetString(reader.GetOrdinal("Scale"));
-                        for(int i = 0; i < certificate.Marks.Count; i++)
+                        string scaleName = reader.GetString(reader.GetOrdinal("Scale")); ;
+                        foreach (ComboBoxItem item in certificate.cbScaleType.Items)
+                        {
+                            if (item.Content.ToString() == scaleName)
+                            {
+                                certificate.cbScaleType.SelectedItem = item;
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < certificate.Marks.Count; i++)
                         {
                             if (reader[reader.GetOrdinal("n" + (i + 1))] == DBNull.Value)
                                 break;
@@ -747,7 +760,7 @@ namespace PriyemnayaKomissiya.View
         private void Abiturient_IssueDocuments(object sender, RoutedEventArgs e)
         {
             if ((AbiturientDGItem)dataDridAbiturients.SelectedItem == null) return;
-            if (MessageBox.Show($"Отметить данную запись как отозванно?\n\n  {((AbiturientDGItem)dataDridAbiturients.SelectedItem).FIO}", "Выдать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"Отметить запись '{((AbiturientDGItem)dataDridAbiturients.SelectedItem).FIO}' как документы выданы?", "Выдать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -766,7 +779,7 @@ namespace PriyemnayaKomissiya.View
                     MessageBox.Show(ex.Message);
                 }
             }
-        }//Удаление
+        }//Выдать документы
         private void Abiturient_SetStatus(object sender, RoutedEventArgs e)
         {
             if ((AbiturientDGItem)dataDridAbiturients.SelectedItem == null) return;
@@ -811,7 +824,7 @@ namespace PriyemnayaKomissiya.View
                         delItemsName += $"И еще {dataDridAbiturients.SelectedItems.Count - 3} запись(-и)";
                 }
 
-                if (MessageBox.Show($"Отметить данные записи как отозванно?\n\n {delItemsName}", "Выдать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show($"Отметить выбранные записи как документы выданы?\n\n {delItemsName}", "Выдать документы", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     try
                     {
@@ -1456,7 +1469,6 @@ namespace PriyemnayaKomissiya.View
                 }
             }
             return true;
-            //проверка на корректность ввода оценок
         }
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
