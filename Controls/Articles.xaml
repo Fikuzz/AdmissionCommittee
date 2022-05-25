@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="PriyemnayaKomissiya.Controls.Articles"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PriyemnayaKomissiya.Controls"
+             mc:Ignorable="d" d:DesignWidth="365.395" Background="#FFF3F4F8" Height="auto">
+    <Grid Height="auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="LeftColun">
+            
+        </StackPanel>
+        <StackPanel Grid.Column="1" x:Name="RightColumn">
+
+        </StackPanel>
+    </Grid>
+</UserControl>
