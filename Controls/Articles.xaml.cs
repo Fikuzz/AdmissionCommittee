@@ -41,9 +41,20 @@ namespace PriyemnayaKomissiya.Controls
                     CheckBox checkBox = new CheckBox()
                     {
                         Style = (Style)FindResource("CheckBoxStyleObshchiy"),
-                        Content = reader.GetString(1),
                         Margin = new Thickness(20, 10, 0, 0)
                     };
+
+                    string discription = GetDiscription(reader.GetString(1));
+                    if(discription != "")
+                    {
+                        checkBox.Content = reader.GetString(1).Replace($"({discription})", "");
+                        checkBox.ToolTip = discription;
+                    }
+                    else
+                    {
+                        checkBox.Content = reader.GetString(1);
+                    }
+
                     checkBoxes.Add(checkBox);
                     if (toLeftColumn)
                     {
@@ -68,6 +79,30 @@ namespace PriyemnayaKomissiya.Controls
             {
                 checkBox.IsChecked = false;
             }
+        }
+        private string GetDiscription(string text)
+        {
+            string result = "";
+            char[] arr = text.ToCharArray();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if(arr[i] == '(')
+                {
+                    for(int j = i+1;j < arr.Length; j++)
+                    {
+                        if(arr[j] == ')')
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            result += arr[j];
+                        }
+                    }
+                    break;
+                }
+            }
+            return result;
         }
     }
 }
