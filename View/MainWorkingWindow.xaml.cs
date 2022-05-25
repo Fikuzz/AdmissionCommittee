@@ -1522,5 +1522,10 @@ namespace PriyemnayaKomissiya.View
                 GridInfo.Visibility = Visibility.Hidden;
             }
         }
+
+        private void Image_MouseUp_3(object sender, MouseButtonEventArgs e)
+        {
+            addEditForm.Visibility = Visibility.Hidden;
+        }
     }
 } 

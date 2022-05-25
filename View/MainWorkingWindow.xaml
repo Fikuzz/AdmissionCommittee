@@ -449,7 +449,7 @@
         </Grid>
         <!--#endregion-->
         <!--#region форма добавления/редактирования записей-->
-                <Grid Visibility="Hidden" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
+                <Grid Visibility="Visible" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="93"/>
                         <ColumnDefinition Width="141*"/>
@@ -457,6 +457,7 @@
                         <ColumnDefinition Width="1154*"/>
                         <ColumnDefinition Width="12"/>
                     </Grid.ColumnDefinitions>
+                    <Image Source="/PriyemnayaKomissiya;component/Resources/Layer 3.png" MouseUp="Image_MouseUp_3" Margin="53,10,10,0" Height="30" VerticalAlignment="Top"/>
                     <TabControl Name="TabControlAddEditForm" BorderThickness="0" TabStripPlacement="Left" Background="{x:Null}" Grid.ColumnSpan="4" Margin="0,0,-0.491,0" Grid.Column="1" SelectionChanged="TabControlAddEditForm_SelectionChanged">
                         <TabItem Header="ОСНОВНОЕ" local:TabItemThemeProperties.Description="Основные данные об абитуриенте" local:TabItemThemeProperties.Number="1" Style="{DynamicResource TabItemAdd}" Padding="8,2,6,2" VerticalContentAlignment="Top" Margin="0,10,0,-10">
                             <Grid Margin="-1,0,0,0">

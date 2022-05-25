@@ -1006,7 +1006,7 @@
             </Setter>
         </Style>
         <!--#endregion-->
-        
+
         <Style x:Key="TextBox" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -1054,6 +1054,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
         <Style x:Key="Button_Close" TargetType="Button">
             <Setter Property="BorderBrush" Value="{x:Null}"/>
             <Setter Property="Template">
@@ -1090,7 +1091,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                             <TextBlock Text="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.FundingType}" Canvas.Left="23" Canvas.Top="20" FontSize="32" FontFamily="{StaticResource Montserrat-Black}"/>
-                            <TextBlock TextWrapping="Wrap" Text="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.StudyType}" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="48" Width="210" FontFamily="{StaticResource Montserrat-Regular}"/>
+                            <TextBlock TextWrapping="Wrap" Text="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.StudyType}" Canvas.Left="23" Canvas.Top="68" FontSize="16" Height="60" Width="230" FontFamily="{StaticResource Montserrat-Regular}"/>
                             <TextBlock Text="Количество записей: " Canvas.Left="23" Canvas.Top="164" FontSize="14" FontFamily="{StaticResource Montserrat-Regular}"/>
                             <TextBlock Text="{TemplateBinding local:ButtonAdmissionPlanThemeProperties.WritesCount}" Canvas.Left="183" Canvas.Top="160" FontSize="18" FontFamily="{StaticResource Montserrat-Black}"/>
                         </Canvas>
