@@ -27,6 +27,7 @@ namespace PriyemnayaKomissiya
         public static void SetStartPosition(object sender)
         {
             TextBox textBox = (TextBox)sender;
+            if (textBox.Text == "") return;
             char[] arr = textBox.Text.ToCharArray();
             if(arr[0] == '_')
             {
@@ -44,13 +45,11 @@ namespace PriyemnayaKomissiya
                 }
             }
         }
-
         private static readonly Regex _regex = new Regex("[^0-9]+");
         public static bool IsTextAllowed(string text)
         {
             return !_regex.IsMatch(text);
         }
-
         public static void CorrectData(object value, ref bool result)
         {
             if(value is Xceed.Wpf.Toolkit.MaskedTextBox textBox){
@@ -69,7 +68,6 @@ namespace PriyemnayaKomissiya
                 }
             }
         }
-
         public static bool FormIsCorrect<T>(Panel panel) where T : IDataForm
         {
             bool correct = true;
