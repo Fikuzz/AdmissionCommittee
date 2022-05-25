@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PriyemnayaKomissiya.View"
         mc:Ignorable="d"
-        Title="Авторизация" Height="789" Width="1421" KeyDown="Window_KeyDown" MinWidth="720" MinHeight="417.7" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" Loaded="Window_Loaded">
+        Title="Авторизация" Height="450" Width="800" KeyDown="Window_KeyDown" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" Loaded="Window_Loaded" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="288*" />
