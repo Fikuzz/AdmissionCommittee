@@ -72,6 +72,7 @@ namespace PriyemnayaKomissiya.View
                 }
             }
             catch { }
+            ucArticles.BlockCheckBox += BlockCheckBox;
         }
         public MainWorkingWindow()
         {
@@ -331,7 +332,6 @@ namespace PriyemnayaKomissiya.View
 
             AddEndButton.Visibility = Visibility.Visible;
             EditEndButton.Visibility = Visibility.Collapsed;
-            GridDataTable.Visibility = Visibility.Hidden;
             addEditForm.Visibility = Visibility.Visible;
             TabControlAddEditForm.SelectedIndex = 0;
             ClearData<StackPanel>(AddEditMainData);
@@ -1202,6 +1202,16 @@ namespace PriyemnayaKomissiya.View
             {
                 MessageBox.Show(ex.Message);
             }
+            if (addEditFormobushenie.SelectedItem.ToString() == "Дневная")
+            {
+                AddEditWork.Visibility = Visibility.Collapsed;
+                textBoxWorkPlace.Text = "";
+                textBoxDoljnost.Text = "";
+            }
+            else
+            {
+                AddEditWork.Visibility = Visibility.Visible;
+            }
         }
         private void AddEditFormFinansirovanie_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1510,6 +1520,40 @@ namespace PriyemnayaKomissiya.View
         private void Image_MouseUp_3(object sender, MouseButtonEventArgs e)
         {
             addEditForm.Visibility = Visibility.Hidden;
+        }
+
+        private void BlockCheckBox(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            if (checkBox == null) return;
+            if (checkBox.IsChecked == true)
+            {
+                addEditForm_CheckBox_DetiSiroti.IsChecked = false;
+                addEditForm_CheckBox_DetiSiroti.IsEnabled = false;
+            }
+            else
+            {
+                addEditForm_CheckBox_DetiSiroti.IsEnabled = true;
+            }
+        }
+        private void BlockCheckBox2(object sender, RoutedEventArgs e)
+        {
+            foreach (CheckBox checkBox in ucArticles.checkBoxes)
+            {
+                if (checkBox.Content.ToString() == "Сирота ")
+                {
+                    if (addEditForm_CheckBox_DetiSiroti.IsChecked == true)
+                    {
+                        checkBox.IsChecked = false;
+                        checkBox.IsEnabled = false;
+                    }
+                    else
+                    {
+                        checkBox.IsEnabled = true;
+                    }
+                    return;
+                }
+            }
         }
     }
 } 

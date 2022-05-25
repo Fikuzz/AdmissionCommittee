@@ -449,7 +449,7 @@
         </Grid>
         <!--#endregion-->
         <!--#region форма добавления/редактирования записей-->
-                <Grid Visibility="Visible" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
+                <Grid Visibility="Hidden" x:Name="addEditForm" Grid.ColumnSpan="2" Margin="0,32,0,0" Grid.Row="2" Background="#FFF3F4F8" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="93"/>
                         <ColumnDefinition Width="141*"/>
@@ -497,7 +497,7 @@
                                     <TextBlock Text="ВЫБЕРИТЕ ЛЬГОТЫ" Margin="10,25,0,10"/>
                                     <StackPanel Orientation="Horizontal">
                                         <CheckBox x:Name="addEditForm_CheckBox_Dogovor" Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Целевой договор" Margin="20,0,0,0"/>
-                                        <CheckBox x:Name="addEditForm_CheckBox_DetiSiroti" Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Дети-сироты" Margin="100,0,0,0"/>
+                                        <CheckBox x:Name="addEditForm_CheckBox_DetiSiroti" Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Дети-сироты" Margin="100,0,0,0" Click="BlockCheckBox2"/>
                                     </StackPanel>
                                     <TextBlock Text="ШКОЛА" Margin="10,25,0,10"/>
                                     <TextBox TextChanged="ClearError" x:Name="addEditFormShool" Style="{DynamicResource TextBox}"/>
@@ -505,11 +505,12 @@
                                     <xctk:MaskedTextBox x:Name="addEditFormGraduationYear" Mask="0000" Style="{DynamicResource TextBox}" TextChanged="MaskedTB_IsComplited" PreviewTextInput="SetStartPosition"/>
                                     <TextBlock Text="ВЫБЕРИТЕ СТАТЬИ" Margin="10,25,0,10"/>
                                     <uc:Articles x:Name="ucArticles"/>
+                                    <StackPanel x:Name="AddEditWork">
                                     <TextBlock Text="МЕСТО РАБОТЫ" Margin="10,25,0,10"/>
                                     <TextBox x:Name="textBoxWorkPlace" Style="{DynamicResource TextBox}" TextChanged="ClearError"/>
                                     <TextBlock Text="ДОЛЖНОСТЬ" Margin="10,25,0,10"/>
                                     <TextBox x:Name="textBoxDoljnost" Style="{DynamicResource TextBox}" TextChanged="ClearError"/>
-                                    
+                                    </StackPanel>
                                     <Button Style="{DynamicResource ButtonStyleObshchiyRED}" Height="53" Margin="139,25,139,0" Content="СЛЕДУЮЩИЙ ЭТАП" Click="Button_NextStep_1"/>
                                 </StackPanel>
                             </ScrollViewer>

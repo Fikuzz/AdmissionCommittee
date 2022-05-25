@@ -24,6 +24,7 @@ namespace PriyemnayaKomissiya.Controls
     {
         private readonly string connectionString;
         public List<CheckBox> checkBoxes = new List<CheckBox>();
+        public RoutedEventHandler BlockCheckBox;
         public Articles()
         {
             InitializeComponent();
@@ -54,6 +55,10 @@ namespace PriyemnayaKomissiya.Controls
                     {
                         checkBox.Content = reader.GetString(1);
                     }
+                    if (checkBox.Content.ToString() == "Сирота ")
+                    {
+                        checkBox.Click += BlockAnotherCB;
+                    }
 
                     checkBoxes.Add(checkBox);
                     if (toLeftColumn)
@@ -72,6 +77,10 @@ namespace PriyemnayaKomissiya.Controls
             {
                 MessageBox.Show(ex.Message, "Заполнение статей");
             }
+        }
+        private void BlockAnotherCB(object sender, RoutedEventArgs e)
+        {
+            BlockCheckBox?.Invoke(sender, e);
         }
         public void Clear()
         {
