@@ -98,6 +98,9 @@
     </ApplicationDefinition>
     <Compile Include="AbiturientDGItem.cs" />
     <Compile Include="ButtonAdmissionPlanThemeProperties.cs" />
+    <Compile Include="Controls\Articles.xaml.cs">
+      <DependentUpon>Articles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Certificate.xaml.cs">
       <DependentUpon>Certificate.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
     <Compile Include="View\MainWorkingWindow.xaml.cs">
       <DependentUpon>MainWorkingWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\Articles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Certificate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
