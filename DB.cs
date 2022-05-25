@@ -290,12 +290,12 @@ namespace PriyemnayaKomissiya
                 SqlCommand command = new SqlCommand("Get_PlaniPriema", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@specialost", specialost);
-                command.Parameters.AddWithValue("@budjet", budjet == true ? "Бюджет" : "");
-                command.Parameters.AddWithValue("@hozrash", hozrash == true ? "Хозрасчет" : "");
-                command.Parameters.AddWithValue("@bazovoe", bazovoe == true ? "На основе базового образования" : "");
-                command.Parameters.AddWithValue("@srednee", srednee == true ? "На основе среднего образования" : "");
-                command.Parameters.AddWithValue("@dnevnaya", dnevnaya == true ? "Дневная" : "");
-                command.Parameters.AddWithValue("@zaochnaya", zaochnaya == true ? "Заочная" : "");
+                command.Parameters.AddWithValue("@budjet", budjet == true ? "Б%" : "");
+                command.Parameters.AddWithValue("@hozrash", hozrash == true ? "Х%" : "");
+                command.Parameters.AddWithValue("@bazovoe", bazovoe == true ? "%баз%" : "");
+                command.Parameters.AddWithValue("@srednee", srednee == true ? "%сред%" : "");
+                command.Parameters.AddWithValue("@dnevnaya", dnevnaya == true ? "Д%" : "");
+                command.Parameters.AddWithValue("@zaochnaya", zaochnaya == true ? "З%" : "");
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
