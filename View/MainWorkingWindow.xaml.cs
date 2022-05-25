@@ -339,6 +339,7 @@ namespace PriyemnayaKomissiya.View
             ClearData<StackPanel>(addEdifFormAtestati);
             ClearData<StackPanel>(addEdifFormCT);
             ClearData<StackPanel>(AddEditFormPassport);
+            ucArticles.Clear();
 
             List<string> spec = DB.Get_SpecialnostiName(true);
             addEditFormspecialnost.SelectedItem = -1;
@@ -529,7 +530,6 @@ namespace PriyemnayaKomissiya.View
             if ((AbiturientDGItem)dataDridAbiturients.SelectedItem != null)
             {
                 //очистка старых данных
-                GridDataTable.Visibility = Visibility.Hidden;
                 addEditForm.Visibility = Visibility.Visible;
                 TabControlAddEditForm.SelectedIndex = 0;
                 foreach (TabItem item in TabControlAddEditForm.Items)
@@ -585,23 +585,15 @@ namespace PriyemnayaKomissiya.View
 
                     SqlConnection con = new SqlConnection(connectionString);
                     con.Open();
-                    for (int k = 0; k < 2; k++)
+                    foreach (CheckBox checkBox in ucArticles.checkBoxes)
                     {
-                        StackPanel panel = Stati.Children[k] as StackPanel;
-                        for (int j = 0; j < 3; j++)
-                        {
-                            CheckBox checkBox = panel.Children[j] as CheckBox;
-                            SqlCommand command1 = new SqlCommand("HasStatya", con);
-                            command1.CommandType = CommandType.StoredProcedure;
-                            command1.Parameters.AddWithValue("@abiturient", ((AbiturientDGItem)dataDridAbiturients.SelectedItem).ID);
-                            command1.Parameters.AddWithValue("@statya", checkBox.Content);
-                            SqlDataReader reader1 = command1.ExecuteReader();
-                            if (reader1.HasRows)
-                            {
-                                checkBox.IsChecked = true;
-                            }
-                            reader1.Close();
-                        }
+                        SqlCommand command1 = new SqlCommand("HasStatya", con);
+                        command1.CommandType = CommandType.StoredProcedure;
+                        command1.Parameters.AddWithValue("@abiturient", ((AbiturientDGItem)dataDridAbiturients.SelectedItem).ID);
+                        command1.Parameters.AddWithValue("@statya", checkBox.Content);
+                        SqlDataReader reader1 = command1.ExecuteReader();
+                        checkBox.IsChecked = reader1.HasRows;
+                        reader1.Close();
                     }
                     con.Close();
                 }
@@ -1080,18 +1072,14 @@ namespace PriyemnayaKomissiya.View
 
             DB.InsertPasportData(AbiturientID, PassportDateVidachi.Text, dateOfBirth.Text, PassportSeriya.Text, PassportNomer.Text, PassportVidan.Text, PassportIdentNum.Text); //Паспортные данные
                                                                                                                                                                                 
-            for (int i = 0; i < 2; i++)
+            foreach(CheckBox checkBox in ucArticles.checkBoxes)
             {
-                StackPanel stackPanel = (StackPanel)Stati.Children[i];
-                for (int j = 0; j < 3; j++)
+                if (checkBox.IsChecked == true)
                 {
-                    CheckBox checkBox = (CheckBox)stackPanel.Children[j];
-                    if (checkBox.IsChecked == true)
-                    {
-                        DB.InsertArticles(AbiturientID, (string)checkBox.Content);
-                    }
+                    DB.InsertArticles(AbiturientID, (string)checkBox.Content);
                 }
-            }//Статьи
+            }
+            //Статьи
             AbiturientsTableLoad(curentPlanPriema.Id);
         }
 
@@ -1153,18 +1141,14 @@ namespace PriyemnayaKomissiya.View
 
             DB.DeleteAllAbiturientDataInTable(AbiturientID, "СтатьиАбитуриента");
 
-            for (int i = 0; i < 2; i++)
+            foreach (CheckBox checkBox in ucArticles.checkBoxes)
             {
-                StackPanel stackPanel = (StackPanel)Stati.Children[i];
-                for (int j = 0; j < 3; j++)
+                if (checkBox.IsChecked == true)
                 {
-                    CheckBox checkBox = (CheckBox)stackPanel.Children[j];
-                    if (checkBox.IsChecked == true)
-                    {
-                        DB.InsertArticles(AbiturientID, (string)checkBox.Content);
-                    }
+                    DB.InsertArticles(AbiturientID, (string)checkBox.Content);
                 }
-            }//Статьи* ?
+            }
+            //Статьи* ?
             AbiturientsTableLoad(curentPlanPriema.Id);
         }
 

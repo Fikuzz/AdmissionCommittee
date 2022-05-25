@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PriyemnayaKomissiya"
         xmlns:uc="clr-namespace:PriyemnayaKomissiya.Controls"
         mc:Ignorable="d"
-        Title="Приемная комиссия «Полоцкий государственный экономический колледж»" Height="1000" Width="1122"
+        Title="Приемная комиссия «Полоцкий государственный экономический колледж»" Height="1792" Width="1122"
         x:Name="MainWorkingWindowForm" Loaded="MainWorkingWindow_Loaded" Background="#FFF6F7FA" SizeChanged="MainWorkingWindowForm_SizeChanged" Closed="MainWorkingWindowForm_Closed" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" MinWidth="1000" WindowStartupLocation="CenterScreen">
     <Grid Background="#0894A1BB">
         <Grid.RowDefinitions>
@@ -504,18 +504,7 @@
                                     <TextBlock Text="ГОД ОКОНЧАНИЯ ШКОЛЫ" Margin="10,25,0,10"/>
                                     <xctk:MaskedTextBox x:Name="addEditFormGraduationYear" Mask="0000" Style="{DynamicResource TextBox}" TextChanged="MaskedTB_IsComplited" PreviewTextInput="SetStartPosition"/>
                                     <TextBlock Text="ВЫБЕРИТЕ СТАТЬИ" Margin="10,25,0,10"/>
-                                    <StackPanel x:Name="Stati" Orientation="Horizontal">
-                                        <StackPanel Width="201">
-                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Инвалиды I и II группы" Margin="20,10,0,0"/>
-                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Дети военнослужащих" Margin="20,10,0,0"/>
-                                            <CheckBox Visibility="Hidden" Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Диплом с отличием" Margin="20,10,0,0"/>
-                                        </StackPanel>
-                                        <StackPanel Width="183">
-                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Инвалиды III группы" Margin="20,10,0,0"/>
-                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Многодетная семья" Margin="20,10,0,0"/>
-                                            <CheckBox Height="15" Style="{DynamicResource CheckBoxStyleObshchiy}" Content="Чернобыльская АЭС" Margin="20,10,0,0"/>
-                                        </StackPanel>
-                                    </StackPanel>
+                                    <uc:Articles x:Name="ucArticles"/>
                                     <TextBlock Text="МЕСТО РАБОТЫ" Margin="10,25,0,10"/>
                                     <TextBox x:Name="textBoxWorkPlace" Style="{DynamicResource TextBox}" TextChanged="ClearError"/>
                                     <TextBlock Text="ДОЛЖНОСТЬ" Margin="10,25,0,10"/>
