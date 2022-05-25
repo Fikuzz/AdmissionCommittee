@@ -14,7 +14,7 @@ using System.Windows.Media;
 
 namespace PriyemnayaKomissiya.View
 {
-    public partial class MainWorkingWindow : Window
+    public partial class MainWorkingWindow : Window //TODO: Скрывать должность и место рботы
     {
         PlanPriema curentPlanPriema = null;
         private readonly int userId;
@@ -315,9 +315,9 @@ namespace PriyemnayaKomissiya.View
                     additional = "зб";
                 else if (addEditFormFinansirovanie.SelectedValue.ToString() == "Хозрасчет")
                     additional = "х/р";
-                else if (addEditFormobrazovanie.SelectedValue != null && addEditFormobrazovanie.SelectedValue.ToString() == "На основе среднего образования")
+                else if (addEditFormobrazovanie.SelectedValue != null && addEditFormobrazovanie.SelectedValue.ToString() == "На основе среднего образования") //TODO: придумать как не жестко проверять данные
                     additional = "с";
-                addEditFormExamList.Text = letter + additional + num;
+                addEditFormExamList.Text = num + letter + additional;
             }
             catch (Exception ex)
             {
@@ -325,7 +325,7 @@ namespace PriyemnayaKomissiya.View
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e) //открытие формы добавления
-        { //TODO: Очищать сертификаты цт
+        {
             ScrollAddMain.ScrollToHome();
             PlanPriema temp = curentPlanPriema.Clone();
 
@@ -341,6 +341,8 @@ namespace PriyemnayaKomissiya.View
             ClearData<StackPanel>(AddEditFormPassport);
 
             List<string> spec = DB.Get_SpecialnostiName(true);
+            addEditFormspecialnost.SelectedItem = -1;
+            addEditFormspecialnost.Items.Clear();
             foreach (string name in spec)
             {
                 addEditFormspecialnost.Items.Add(name);
@@ -624,8 +626,6 @@ namespace PriyemnayaKomissiya.View
 
                         contact.cbContactType.SelectedItem = reader.GetString(2);
                         contact.mtbData.Text = reader.GetString(3);
-                        break;
-
                     }
                     if((int)AddEditFormContacts.Tag == 0)
                     {
