@@ -1540,7 +1540,7 @@ namespace PriyemnayaKomissiya.View
         {
             foreach (CheckBox checkBox in ucArticles.checkBoxes)
             {
-                if (checkBox.Content.ToString() == "Сирота ")
+                if (checkBox.Content.ToString() == "Сирота")
                 {
                     if (addEditForm_CheckBox_DetiSiroti.IsChecked == true)
                     {

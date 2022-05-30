@@ -8,7 +8,7 @@
         xmlns:uc="clr-namespace:PriyemnayaKomissiya.Controls"
         mc:Ignorable="d"
         Title="Приемная комиссия «Полоцкий государственный экономический колледж»" Height="1792" Width="1122"
-        x:Name="MainWorkingWindowForm" Loaded="MainWorkingWindow_Loaded" Background="#FFF6F7FA" SizeChanged="MainWorkingWindowForm_SizeChanged" Closed="MainWorkingWindowForm_Closed" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" MinWidth="1000" WindowStartupLocation="CenterScreen">
+        x:Name="MainWorkingWindowForm" Loaded="MainWorkingWindow_Loaded" Background="#FFF6F7FA" SizeChanged="MainWorkingWindowForm_SizeChanged" Closed="MainWorkingWindowForm_Closed" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" MinWidth="800" MinHeight="600" WindowStartupLocation="CenterScreen">
     <Grid Background="#0894A1BB">
         <Grid.RowDefinitions>
             <RowDefinition Height ="80"/>
