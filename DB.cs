@@ -440,11 +440,11 @@ namespace PriyemnayaKomissiya
             {
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
-                string sql1 = $"SELECT Буква FROM Специальность WHERE Наименование = '{specialityName}'";
+                string sql1 = $"SELECT Буква FROM Специальность WHERE КраткоеНаименование = '{specialityName}'";
                 SqlCommand command = new SqlCommand(sql1, connection);
                 SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
-                letter = reader.GetString(0);
+                if(reader.Read())
+                    letter = reader.GetString(0);
                 reader.Close();
             }
             catch (Exception ex)
@@ -464,8 +464,7 @@ namespace PriyemnayaKomissiya
                 command.Parameters.AddWithValue("id", AdmissionPlanID);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
-                if(reader[0] != DBNull.Value)
+                if (reader.Read())
                 {
                     value = reader.GetInt32(0);
                 }

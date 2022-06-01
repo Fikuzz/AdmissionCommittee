@@ -12,6 +12,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
+using System.Windows.Media.Animation;
+
 namespace PriyemnayaKomissiya.View
 {
     public partial class MainWorkingWindow : Window //TODO: Скрывать должность и место рботы
@@ -266,14 +268,27 @@ namespace PriyemnayaKomissiya.View
         private void ButtonPos(int col) //изменение позиций кнопок под размер экрана
         {
             if (planPriemaColumn == col) return;
+
+            double x = colButtonsize.Width.Value;
+            double y = rowButtonsize.Height.Value;
+
             int buttons = 0;
             int row = 1;
             while (buttons < planPriemaButtons.Count)
             {
                 for (int i = 1; i <= col && buttons < planPriemaButtons.Count; i++)
                 {
-                    planPriemaButtons[buttons].SetValue(Grid.RowProperty, row);
-                    planPriemaButtons[buttons].SetValue(Grid.ColumnProperty, i);
+                    Button button = planPriemaButtons[buttons];
+                    int curRow = (int)button.GetValue(Grid.RowProperty);
+                    int curCol = (int)button.GetValue(Grid.ColumnProperty);
+
+                    ThicknessAnimation animation = new ThicknessAnimation
+                    {
+                        From = button.Margin,
+                        To = new Thickness((i - curCol - 1) * x, (row - curRow - 1) * y, 0, 0),
+                        Duration = TimeSpan.FromSeconds(0.2)
+                    };
+                    planPriemaButtons[buttons].BeginAnimation(Button.MarginProperty, animation);
                     buttons++;
                 }
                 row++;
@@ -316,7 +331,7 @@ namespace PriyemnayaKomissiya.View
                     additional = "зб";
                 else if (addEditFormFinansirovanie.SelectedValue.ToString() == "Хозрасчет")
                     additional = "х/р";
-                else if (addEditFormobrazovanie.SelectedValue != null && addEditFormobrazovanie.SelectedValue.ToString() == "На основе среднего образования") //TODO: придумать как не жестко проверять данные
+                else if (addEditFormobrazovanie.SelectedValue != null && Regex.IsMatch(addEditFormobrazovanie.SelectedValue.ToString(), @"\w*сред\w*")) //TODO: придумать как не жестко проверять данные
                     additional = "с";
                 addEditFormExamList.Text = num + letter + additional;
             }
@@ -349,7 +364,7 @@ namespace PriyemnayaKomissiya.View
                 addEditFormspecialnost.Items.Add(name);
             }
 
-            addEditFormspecialnost.SelectedItem = temp.NameSpec;
+            addEditFormspecialnost.SelectedItem = (TabControl.SelectedItem as TabItem).Header;
             addEditFormobushenie.SelectedItem = temp.NameForm;
             addEditFormFinansirovanie.SelectedItem = temp.NameFinance;
             addEditFormobrazovanie.SelectedItem = temp.NameObrazovaie;
@@ -548,7 +563,7 @@ namespace PriyemnayaKomissiya.View
                     addEditFormspecialnost.Items.Add(name);
                 }
 
-                addEditFormspecialnost.SelectedItem = temp.NameSpec;
+                addEditFormspecialnost.SelectedItem = (TabControl.SelectedItem as TabItem).Header;
                 addEditFormobushenie.SelectedItem = temp.NameForm;
                 addEditFormFinansirovanie.SelectedItem = temp.NameFinance;
                 addEditFormobrazovanie.SelectedItem = temp.NameObrazovaie;
@@ -1158,7 +1173,7 @@ namespace PriyemnayaKomissiya.View
             if (addEditFormspecialnost.SelectedItem == null) return;
             try
             {
-                string sql1 = $"SELECT DISTINCT ФормаОбучения.Наименование FROM ПланПриема JOIN Специальность ON(ПланПриема.IDСпециальности = Специальность.IDСпециальность) JOIN ФормаОбучения ON (ПланПриема.IDФормаОбучения = ФормаОбучения.IDФормаОбучения)  WHERE Специальность.Наименование LIKE N'{((ComboBox)sender).SelectedItem}'";
+                string sql1 = $"SELECT DISTINCT ФормаОбучения.Наименование FROM ПланПриема JOIN Специальность ON(ПланПриема.IDСпециальности = Специальность.IDСпециальность) JOIN ФормаОбучения ON (ПланПриема.IDФормаОбучения = ФормаОбучения.IDФормаОбучения)  WHERE Специальность.КраткоеНаименование LIKE N'{((ComboBox)sender).SelectedItem}'";
 
                 SqlConnection connection = new SqlConnection(connectionString);
                 SqlCommand command = new SqlCommand(sql1, connection);
@@ -1183,7 +1198,7 @@ namespace PriyemnayaKomissiya.View
             if (addEditFormobushenie.SelectedItem == null) return;
             try
             {
-                string sql1 = $"SELECT DISTINCT Финансирование.Наименование FROM ПланПриема JOIN Специальность ON(ПланПриема.IDСпециальности = Специальность.IDСпециальность) JOIN ФормаОбучения ON (ПланПриема.IDФормаОбучения = ФормаОбучения.IDФормаОбучения) JOIN Финансирование ON (ПланПриема.IDФинансирования = Финансирование.IDФинансирования) WHERE Специальность.Наименование LIKE N'{addEditFormspecialnost.SelectedItem}' AND ФормаОбучения.Наименование LIKE N'{addEditFormobushenie.SelectedItem}'";
+                string sql1 = $"SELECT DISTINCT Финансирование.Наименование FROM ПланПриема JOIN Специальность ON(ПланПриема.IDСпециальности = Специальность.IDСпециальность) JOIN ФормаОбучения ON (ПланПриема.IDФормаОбучения = ФормаОбучения.IDФормаОбучения) JOIN Финансирование ON (ПланПриема.IDФинансирования = Финансирование.IDФинансирования) WHERE Специальность.КраткоеНаименование LIKE N'{addEditFormspecialnost.SelectedItem}' AND ФормаОбучения.Наименование LIKE N'{addEditFormobushenie.SelectedItem}'";
 
                 SqlConnection connection = new SqlConnection(connectionString);
                 SqlCommand command = new SqlCommand(sql1, connection);
@@ -1218,7 +1233,7 @@ namespace PriyemnayaKomissiya.View
             if (addEditFormFinansirovanie.SelectedItem == null) return;
             try
             {
-                string sql1 = $"SELECT DISTINCT ФормаОбучения.Образование FROM ПланПриема JOIN Специальность ON(ПланПриема.IDСпециальности = Специальность.IDСпециальность) JOIN ФормаОбучения ON (ПланПриема.IDФормаОбучения = ФормаОбучения.IDФормаОбучения) JOIN Финансирование ON (ПланПриема.IDФинансирования = Финансирование.IDФинансирования) WHERE Специальность.Наименование LIKE N'{addEditFormspecialnost.SelectedItem}' AND ФормаОбучения.Наименование LIKE N'{addEditFormobushenie.SelectedItem}' AND Финансирование.Наименование LIKE N'{addEditFormFinansirovanie.SelectedItem}'";
+                string sql1 = $"SELECT DISTINCT ФормаОбучения.Образование FROM ПланПриема JOIN Специальность ON(ПланПриема.IDСпециальности = Специальность.IDСпециальность) JOIN ФормаОбучения ON (ПланПриема.IDФормаОбучения = ФормаОбучения.IDФормаОбучения) JOIN Финансирование ON (ПланПриема.IDФинансирования = Финансирование.IDФинансирования) WHERE Специальность.КраткоеНаименование LIKE N'{addEditFormspecialnost.SelectedItem}' AND ФормаОбучения.Наименование LIKE N'{addEditFormobushenie.SelectedItem}' AND Финансирование.Наименование LIKE N'{addEditFormFinansirovanie.SelectedItem}'";
 
                 SqlConnection connection = new SqlConnection(connectionString);
                 SqlCommand command = new SqlCommand(sql1, connection);
@@ -1519,7 +1534,11 @@ namespace PriyemnayaKomissiya.View
 
         private void Image_MouseUp_3(object sender, MouseButtonEventArgs e)
         {
-            addEditForm.Visibility = Visibility.Hidden;
+            MessageBoxResult messageBoxResult = MessageBox.Show("Данные не будут сохранены!", "Закрыт форму?", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                addEditForm.Visibility = Visibility.Hidden;
+            }
         }
 
         private void BlockCheckBox(object sender, RoutedEventArgs e)

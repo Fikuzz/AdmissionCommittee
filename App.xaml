@@ -1042,18 +1042,69 @@
                                           VerticalAlignment="Center" />
                             </Grid>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#50ffffff"/>
+                                <Setter Property="BorderBrush" Value="#dfdfdf"/>
+                            </Trigger>
+                            <Trigger Property="Tag" Value="Error">
+                                <Setter Property="BorderBrush" Value="{StaticResource FF576B}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="#50ffffff"/>
-                    <Setter Property="BorderBrush" Value="#dfdfdf"/>
-                </Trigger>
-                <Trigger Property="Tag" Value="Error">
-                    <Setter Property="BorderBrush" Value="{StaticResource FF576B}"/>
-                </Trigger>
-            </Style.Triggers>
+        </Style>
+        <Style x:Key="tbAtestatSeries" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="500"/>
+            <Setter Property="Foreground" Value="{StaticResource font}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="True"
+                                CornerRadius="20" >
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" 
+                                          Focusable="false" 
+                                          HorizontalAlignment="Left"
+                                          Margin="20,0,0,0" 
+                                          Width="{TemplateBinding Width}"
+                                          HorizontalScrollBarVisibility="Hidden" 
+                                          VerticalScrollBarVisibility="Hidden" 
+                                          Height="38"
+                                          VerticalAlignment="Center" />
+                                <Label x:Name="Hint" Content="" Foreground="{StaticResource 94A1BB}" Margin="17,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#50ffffff"/>
+                                <Setter Property="BorderBrush" Value="#dfdfdf"/>
+                            </Trigger>
+                            <Trigger Property="Tag" Value="Error">
+                                <Setter Property="BorderBrush" Value="{StaticResource FF576B}"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Hint" Property="Content" Value="A-0000000"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="Button_Close" TargetType="Button">

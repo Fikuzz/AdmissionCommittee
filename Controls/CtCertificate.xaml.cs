@@ -6,13 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace PriyemnayaKomissiya.Controls
 {
@@ -27,6 +22,14 @@ namespace PriyemnayaKomissiya.Controls
             InitializeComponent();
             tbTitle.Text = "СЕРТИФИКАТ ЦТ " + Num;
             connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                From = 0,
+                To = 315,
+                Duration = TimeSpan.FromSeconds(0.2)
+            };
+            this.BeginAnimation(UserControl.HeightProperty, animation);
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -45,6 +48,17 @@ namespace PriyemnayaKomissiya.Controls
         }
 
         private void Button_CloseNote(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                From = this.Height,
+                To = 0,
+                Duration = TimeSpan.FromSeconds(0.2)
+            };
+            animation.Completed += (_, __) => CloseForm();
+            this.BeginAnimation(UserControl.HeightProperty, animation);
+        }
+        void CloseForm()
         {
             Panel panel = this.Parent as Panel;
             panel.Children.Remove(this);
