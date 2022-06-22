@@ -12,11 +12,15 @@ using System.Windows.Media.Animation;
 namespace PriyemnayaKomissiya.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для СT.xaml
+    /// Логика взаимодействия для формы добавления и редактирования сертификата
     /// </summary>
     public partial class CtCertificate : UserControl, IDataForm
     {
         private readonly string connectionString;
+        /// <summary>
+        /// Конструктор формы контактных данных
+        /// </summary>
+        /// <param name="Num">Номер формы</param>
         public CtCertificate(int Num)
         {
             InitializeComponent();
@@ -31,22 +35,30 @@ namespace PriyemnayaKomissiya.Controls
             };
             this.BeginAnimation(UserControl.HeightProperty, animation);
         }
-
+        /// <summary>
+        /// Обработчик для ввода только числовых значений
+        /// </summary>
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             PLib.IsTextAllowed(e.Text);
         }
-
+        /// <summary>
+        /// Устанавливеет курсо в начало маски
+        /// </summary>
         private void SetStartPosition(object sender, TextCompositionEventArgs e)
         {
             PLib.SetStartPosition(sender);
         }
-
+        /// <summary>
+        /// Очистка тега Error при изменении текста
+        /// </summary>
         private void ClearError(object sender, TextChangedEventArgs e)
         {
             PLib.ClearError(sender);
         }
-
+        /// <summary>
+        /// Закрытие формы
+        /// </summary>
         private void Button_CloseNote(object sender, RoutedEventArgs e)
         {
             DoubleAnimation animation = new DoubleAnimation
@@ -73,7 +85,9 @@ namespace PriyemnayaKomissiya.Controls
             PLib.CorrectData(tbSeries, ref corect);
             return corect;
         }
-
+        /// <summary>
+        /// Проверка корректности вода балла ЦТ
+        /// </summary>
         private void ScoreTextInput(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;

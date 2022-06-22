@@ -18,13 +18,21 @@ using System.Windows.Shapes;
 namespace PriyemnayaKomissiya.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для Articles.xaml
+    /// Логика взаимодействия для формы статей
     /// </summary>
     public partial class Articles : UserControl
     {
         private readonly string connectionString;
+        /// <summary>
+        /// Список статей
+        /// </summary>
         public List<CheckBox> checkBoxes = new List<CheckBox>();
-        public RoutedEventHandler BlockCheckBox;
+        /// <summary>
+        /// команда бокирования льготы Сирота
+        /// </summary>
+        public RoutedEventHandler BlockCheckBox; 
+
+
         public Articles()
         {
             InitializeComponent();
@@ -74,10 +82,16 @@ namespace PriyemnayaKomissiya.Controls
                 MessageBox.Show(ex.Message, "Заполнение статей");
             }
         }
+        /// <summary>
+        /// Вызов команды для блокирования льготы Строта
+        /// </summary>
         private void BlockAnotherCB(object sender, RoutedEventArgs e)
         {
             BlockCheckBox?.Invoke(sender, e);
         }
+        /// <summary>
+        /// Установка всей статей на false
+        /// </summary>
         public void Clear()
         {
             foreach(CheckBox checkBox in checkBoxes)

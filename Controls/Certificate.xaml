@@ -70,6 +70,6 @@
         <TextBlock x:Name="tblTotalMarks" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Общее количество отметок: 0"  Foreground="{StaticResource 94A1BB}"/>
         <Line X1="0" Y1="5" X2="500" Y2="5" Stroke="{StaticResource 94A1BB}" Width="500" Height="19" Margin="166,0,167,0"/>
         <TextBlock Text="ПЕРЕВОДНАЯ ШКАЛА" Foreground="{StaticResource 94A1BB}" Width="482"/>
-        <ComboBox Name="cbScaleType" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="500" SelectionChanged="ScaleType_SelectionChanged"/>
+        <ComboBox Name="cbScaleType" SelectedIndex="0" Style="{DynamicResource ComboBoxFlatStyle}" Width="500" SelectionChanged="ScaleType_SelectionChanged" MouseWheel="cbScaleType_MouseWheel"/>
     </StackPanel>
 </UserControl>

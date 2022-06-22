@@ -19,12 +19,20 @@ using System.Windows.Shapes;
 namespace PriyemnayaKomissiya.Controls
 {
 	/// <summary>
-	/// Логика взаимодействия для Certificate.xaml
+	/// Логика взаимодействия для формы редактирования сертификата
 	/// </summary>
 	public partial class Certificate : UserControl, IDataForm
 	{
+		/// <summary>
+		/// список полей для отметок
+		/// </summary>
 		public List<TextBox> Marks = new List<TextBox>();
 		private readonly string connectionString;
+		/// <summary>
+		/// конструктор для формы аттетата
+		/// </summary>
+		/// <param name="ButtonClose">Определяет будел ли видна кнопка закрытия формы</param>
+		/// <param name="Num">Номер аттестата</param>
 		public Certificate(Visibility ButtonClose, int Num)
 		{
 			InitializeComponent();
@@ -87,7 +95,9 @@ namespace PriyemnayaKomissiya.Controls
 			};
 			this.BeginAnimation(UserControl.HeightProperty, animation);
 		}
-
+		/// <summary>
+		/// Обработчик кнопки закрытия формы
+		/// </summary>>
 		private void Button_CloseNote(object sender, RoutedEventArgs e)
 		{
 			DoubleAnimation animation = new DoubleAnimation
@@ -124,12 +134,16 @@ namespace PriyemnayaKomissiya.Controls
 
             return result;
 		}
-
+		/// <summary>
+		/// Обработчик для снятия тега Error с поля
+		/// </summary>
 		private void ClearError(object sender, TextChangedEventArgs e)
 		{
 			PLib.ClearError(sender);
 		}
-
+		/// <summary>
+		/// Подсчет суммы отметок аттестата 
+		/// </summary>
 		private void TextBox_GetMarksSum(object sender, TextChangedEventArgs e)
         {
 			if (Marks.Count == 0) return;
@@ -146,11 +160,16 @@ namespace PriyemnayaKomissiya.Controls
             }
             tblTotalMarks.Text = "Общее количество отметок: " + MarksCount;
         }
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+		/// <summary>
+		/// Обработчик для полей которые могут принимать тоько числа
+		/// </summary>
+		private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
 		{
 			e.Handled = !PLib.IsTextAllowed(e.Text);
 		}
-
+		/// <summary>
+		/// Обработчик изменения шкалы для блокиования неиспользуемых полей отметок
+		/// </summary>
 		private void ScaleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			ComboBoxItem boxItem = (ComboBoxItem)e.AddedItems[0];
@@ -171,10 +190,19 @@ namespace PriyemnayaKomissiya.Controls
 				}
 			}
 		}
-
-        private void TextBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		/// <summary>
+		/// Обработчик для выделения всего текста при выборе поля отметки
+		/// </summary>
+		private void TextBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 			(sender as TextBox).SelectAll();
         }
-    }
+		/// <summary>
+		/// Обработчик запрещающий изменения элемента combobox колесиком мыши
+		/// </summary>
+		private void cbScaleType_MouseWheel(object sender, MouseWheelEventArgs e)
+		{
+			e.Handled = true;
+		}
+	}
 }

@@ -9,13 +9,22 @@ namespace PriyemnayaKomissiya
     class AbiturientDGItem
     {
         public int ID { get; }
+        /// <summary>
+        /// Проядковый номер абитуриента
+        /// </summary>
         public int Num { get; }
         public string FIO { get; set; }
         public string Lgoti { get; set; }
         public string Stati { get; set; }
         public string Vladelec { get; set; }
+        /// <summary>
+        /// Дата записи
+        /// </summary>
         public string Date { get; set; }
         public string Status { get; set; }
+        /// <summary>
+        /// Скрыто ли поле
+        /// </summary>
         public bool Hide { get; set; }
 
         public string Shool { get; set; }

@@ -19,12 +19,16 @@ using System.Windows.Media.Animation;
 namespace PriyemnayaKomissiya.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для ContactData.xaml
+    /// Логика взаимодействия для формы добавления и редактирования контактных данных
     /// </summary>
     public partial class ContactData : UserControl, IDataForm
     {
         private readonly string connectionString;
-        
+        /// <summary>
+        /// Конструктор для формы контактных данных
+        /// </summary>
+        /// <param name="ButtonClose">Видимость кнопки закрытия формы</param>
+        /// <param name="Num">Номер формы</param>
         public ContactData(Visibility ButtonClose, int Num)
         {
             InitializeComponent();
@@ -56,7 +60,9 @@ namespace PriyemnayaKomissiya.Controls
             };
             this.BeginAnimation(UserControl.HeightProperty, animation);
         }
-
+        /// <summary>
+        /// Закрытие формы
+        /// </summary>
         private void Button_CloseNote(object sender, RoutedEventArgs e)
         {
             DoubleAnimation animation = new DoubleAnimation
@@ -74,7 +80,9 @@ namespace PriyemnayaKomissiya.Controls
             panel.Children.Remove(this);
             panel.Tag = (int)panel.Tag - 1;
         }
-
+        /// <summary>
+        /// Установки маски при выборе контакта "Мобильный телефон"
+        /// </summary>
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Xceed.Wpf.Toolkit.MaskedTextBox textBox = ((StackPanel)((ComboBox)sender).Parent).Children[5] as Xceed.Wpf.Toolkit.MaskedTextBox;
@@ -90,12 +98,16 @@ namespace PriyemnayaKomissiya.Controls
                     break;
             }
         }
-
+        /// <summary>
+        /// Убирает тег Error поля при его изменении
+        /// </summary>
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             PLib.ClearError(sender);
         }
-
+        /// <summary>
+        /// Устанавливеет курсо в начало маски
+        /// </summary>
         private void SetStartPosition(object sender, RoutedEventArgs e)
         {
             PLib.SetStartPosition(sender);

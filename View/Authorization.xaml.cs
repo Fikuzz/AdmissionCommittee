@@ -12,12 +12,18 @@ using System.DirectoryServices.AccountManagement;
 namespace PriyemnayaKomissiya.View
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для формы авторизации
     /// </summary>
     public partial class Authorization : Window
     {
         private string connectionString;
+        /// <summary>
+        /// Название группы имеющей доступ к программе
+        /// </summary>
         private string groupName = "grp_priem";
+        /// <summary>
+        /// Конструктор по умолчанию для формы авторизации
+        /// </summary>
         public Authorization()
         {
             InitializeComponent();
@@ -25,6 +31,9 @@ namespace PriyemnayaKomissiya.View
         }
 
         #region Войти в систему
+        /// <summary>
+        /// Обработчик кнопки входа
+        /// </summary>
         private void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -32,7 +41,7 @@ namespace PriyemnayaKomissiya.View
                 SqlConnection connection = new SqlConnection(connectionString);
                 if (tbPassword.Password == "priemadmin")
                 {
-                    string hasUser = $"SELECT IDПользователя, ФИО FROM Пользователь WHERE Логин = '{tbLogin.Text}' AND IDроли = 4";
+                    string hasUser = $"SELECT IDПользователя, ФИО FROM Пользователь WHERE Логин = '{tbLogin.Text}' AND IDроли = (SELECT IDРоли FROM Роль WHERE Наименование = 'admin')";
                     SqlCommand command = new SqlCommand(hasUser, connection);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();

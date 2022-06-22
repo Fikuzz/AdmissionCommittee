@@ -11,8 +11,15 @@ using System.Windows.Input;
 
 namespace PriyemnayaKomissiya
 {
+    /// <summary>
+    /// Статический класс с общими методами
+    /// </summary>
     abstract class PLib
     {
+        /// <summary>
+        /// Очистка тега Error
+        /// </summary>
+        /// <param name="sender">элемент</param>
         public static void ClearError(object sender)
         {
             if (((TextBox)sender).Text == "")
@@ -24,12 +31,16 @@ namespace PriyemnayaKomissiya
                 ((TextBox)sender).Tag = "";
             }
         }
+        /// <summary>
+        /// Установить карретку в начало маски
+        /// </summary>
+        /// <param name="sender">MaskedTextBox</param>
         public static void SetStartPosition(object sender)
         {
             TextBox textBox = (TextBox)sender;
             if (textBox.Text == "") return;
             char[] arr = textBox.Text.ToCharArray();
-            if(arr[0] == '_')
+            if (arr[0] == '_')
             {
                 textBox.SelectionStart = 0;
             }
@@ -45,29 +56,47 @@ namespace PriyemnayaKomissiya
                 }
             }
         }
+
         private static readonly Regex _regex = new Regex("[^0-9]+");
+        /// <summary>
+        /// Проверка на ввод только числовых значений
+        /// </summary>
+        /// <param name="text">значение</param>
+        /// <returns></returns>
         public static bool IsTextAllowed(string text)
         {
             return !_regex.IsMatch(text);
         }
+        /// <summary>
+        /// Проверка что элемент не пустой и заполненность маски ввода
+        /// </summary>
+        /// <param name="value">текстовый элемент</param>
+        /// <param name="result">значение для результата проверки</param>
         public static void CorrectData(object value, ref bool result)
         {
-            if(value is Xceed.Wpf.Toolkit.MaskedTextBox textBox){
-                if(textBox.IsMaskCompleted == false || (string)textBox.Tag == "Error")
+            if (value is Xceed.Wpf.Toolkit.MaskedTextBox textBox)
+            {
+                if (textBox.IsMaskCompleted == false || (string)textBox.Tag == "Error")
                 {
                     result = false;
                     textBox.Tag = "Error";
                 }
             }
-            else if(value is TextBox tb)
+            else if (value is TextBox tb)
             {
-                if(tb.Text == "" || (string)tb.Tag == "Error")
+                if (tb.Text == "" || (string)tb.Tag == "Error")
                 {
                     result = false;
                     tb.Tag = "Error";
                 }
             }
         }
+        /// <summary>
+        /// Проверка корректности форм реализующих интерфейс IDataForm
+        /// </summary>
+        /// <typeparam name="T">Название формы</typeparam>
+        /// <param name="panel">контейнер в котором находяться формамы</param>
+        /// <returns></returns>
         public static bool FormIsCorrect<T>(Panel panel) where T : IDataForm
         {
             bool correct = true;
@@ -83,5 +112,10 @@ namespace PriyemnayaKomissiya
             }
             return correct;
         }
+        /// <summary>
+        /// очистка текстовых полей чекбоксов и тд
+        /// </summary>
+        /// <typeparam name="T">Тип элемента</typeparam>
+        /// <param name="obj">Элемент</param>
     }
 }

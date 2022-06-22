@@ -7,6 +7,9 @@ using System.Windows;
 
 namespace PriyemnayaKomissiya
 {
+    /// <summary>
+    /// Класс настройки стиля вкладок на форме редакирования/добавления
+    /// </summary>
     class TabItemThemeProperties
     {
         public static string GetDescription(DependencyObject obj)
