@@ -7,8 +7,8 @@
         xmlns:local="clr-namespace:PriyemnayaKomissiya"
         xmlns:uc="clr-namespace:PriyemnayaKomissiya.Controls"
         mc:Ignorable="d"
-        Title="Приемная комиссия УО«Полоцкий государственный экономический колледж»" Height="1792" Width="1122"
-        x:Name="MainWorkingWindowForm" Loaded="MainWorkingWindow_Loaded" Background="#FFF6F7FA" SizeChanged="MainWorkingWindowForm_SizeChanged" Closed="MainWorkingWindowForm_Closed" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" MinWidth="800" MinHeight="600" WindowStartupLocation="CenterScreen">
+        Title="Приемная комиссия УО«Полоцкий государственный экономический колледж»"
+        x:Name="MainWorkingWindowForm" Loaded="MainWorkingWindow_Loaded" Background="#FFF6F7FA" SizeChanged="MainWorkingWindowForm_SizeChanged" Closed="MainWorkingWindowForm_Closed" Icon="/PriyemnayaKomissiya;component/Resources/ico.ico" Width="800" Height="600" MinWidth="800" MinHeight="600" WindowStartupLocation="CenterScreen">
     <Grid Background="#0894A1BB">
         <Grid.RowDefinitions>
             <RowDefinition Height ="80"/>
@@ -66,7 +66,7 @@
         <Grid x:Name="MainGrid" Margin="10,32,0,0" Visibility="Visible" Grid.Column="1" Grid.Row="2">
             <Label Name="lbPlanPriema" Content="ПЛАН ПРИЁМА 2022" HorizontalAlignment="Left" Margin="39,13,0,0" VerticalAlignment="Top" FontFamily="{StaticResource Montserrat-Regular}" FontSize="14" Foreground="#FF76829B" Height="26" Width="382"/>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,44,0,0">
-                <Grid x:Name="grdAdmissionPlans" Grid.Column="2" RenderTransformOrigin="0.5,0.5">
+                <Grid x:Name="grdAdmissionPlans" Grid.Column="2" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="483">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
                         <RowDefinition x:Name="rowButtonsize" Height="240"/>

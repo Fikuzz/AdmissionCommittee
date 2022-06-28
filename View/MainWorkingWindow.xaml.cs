@@ -87,12 +87,6 @@ namespace PriyemnayaKomissiya.View
                             case "WindowState:":
                                 this.WindowState = (WindowState)Enum.Parse(typeof(WindowState), settingStr[1]);
                                 break;
-                            case "WindowWidth:":
-                                this.Width = Convert.ToDouble(settingStr[1]);
-                                break;
-                            case "WindowHeight:":
-                                this.Height = Convert.ToDouble(settingStr[1]);
-                                break;
                         }
                     }
                 }
@@ -135,7 +129,18 @@ namespace PriyemnayaKomissiya.View
         {
             if (this.WindowState == WindowState.Maximized)
             {
-                ButtonPos(4);
+                if (System.Windows.SystemParameters.PrimaryScreenWidth < 1300)
+                {
+                    ButtonPos(2);
+                }
+                else if (System.Windows.SystemParameters.PrimaryScreenWidth < 1600)
+                {
+                    ButtonPos(3);
+                }
+                else
+                {
+                    ButtonPos(4);
+                }
             }
             else if (this.Width < 1300)
             {
@@ -180,8 +185,6 @@ namespace PriyemnayaKomissiya.View
                         sw.Write(((CheckBox)Filter.Children[i]).IsChecked + " ");
                 }
                 sw.WriteLine("\nWindowState: " + (int)this.WindowState);
-                sw.WriteLine("WindowWidth: " + (double)this.Width);
-                sw.WriteLine("WindowHeight: " + (double)this.Height);
             }
         }
         /// <summary>
@@ -299,6 +302,7 @@ namespace PriyemnayaKomissiya.View
                 }
                 row++;
             }
+            grdAdmissionPlans.Height = (row - 1) * y;
             planPriemaColumn = col;
         }
         /// <summary>
@@ -1340,6 +1344,7 @@ namespace PriyemnayaKomissiya.View
                 SqlCommand command = new SqlCommand(sql1, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+                addEditFormFinansirovanie.SelectedIndex = 0;
                 addEditFormobrazovanie.Items.Clear();
                 while (reader.Read())
                 {
