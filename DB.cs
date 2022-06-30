@@ -592,7 +592,14 @@ namespace PriyemnayaKomissiya
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    value = reader.GetInt32(0);
+                    if (reader[0] != DBNull.Value)
+                    {
+                        value = reader.GetInt32(0);
+                    }
+                    else
+                    {
+                        value = 1;
+                    }
                 }
                 reader.Close();
                 connection.Close();

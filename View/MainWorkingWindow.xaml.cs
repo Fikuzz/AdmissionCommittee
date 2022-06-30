@@ -351,6 +351,7 @@ namespace PriyemnayaKomissiya.View
             try
             {
                 letter = DB.Get_SpecialtyLetter((string)addEditFormspecialnost.SelectedValue);
+
                 num = DB.Get_NextExamList(curentPlanPriema.Id);
 
                 if (addEditFormobushenie.SelectedValue.ToString() == "Заочная")
@@ -1285,6 +1286,7 @@ namespace PriyemnayaKomissiya.View
                 SqlCommand command = new SqlCommand(sql1, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+                addEditFormobushenie.SelectedIndex = -1;
                 addEditFormobushenie.Items.Clear();
                 while (reader.Read())
                 {
@@ -1313,6 +1315,7 @@ namespace PriyemnayaKomissiya.View
                 SqlCommand command = new SqlCommand(sql1, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+                addEditFormFinansirovanie.SelectedIndex = -1;
                 addEditFormFinansirovanie.Items.Clear();
                 while (reader.Read())
                 {
@@ -1351,7 +1354,7 @@ namespace PriyemnayaKomissiya.View
                 SqlCommand command = new SqlCommand(sql1, connection);
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
-                addEditFormFinansirovanie.SelectedIndex = 0;
+                addEditFormobrazovanie.SelectedIndex = -1;
                 addEditFormobrazovanie.Items.Clear();
                 while (reader.Read())
                 {
