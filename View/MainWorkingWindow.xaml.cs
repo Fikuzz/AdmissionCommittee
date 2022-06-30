@@ -53,11 +53,16 @@ namespace PriyemnayaKomissiya.View
             InitializeComponent();
             userId = idUser;
             lUser_FIO.Text = FIOUser;
+            ucArticles.BlockCheckBox += BlockCheckBox;
 
             connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            var path = System.IO.Path.GetDirectoryName(location);
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\AppData\\Roaming\\PriyemnayaKomissiya";
+            if (!Directory.Exists(path))
+            {
+                return;
+            }
             try {
                 using (StreamReader sr = new StreamReader(path + "/config"))
                 {
@@ -92,7 +97,6 @@ namespace PriyemnayaKomissiya.View
                 }
             }
             catch { }
-            ucArticles.BlockCheckBox += BlockCheckBox;
         }
         /// <summary>
         /// Завершение загрузки формы
@@ -174,8 +178,11 @@ namespace PriyemnayaKomissiya.View
         private void MainWorkingWindowForm_Closed(object sender, EventArgs e)
         {
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            var path = System.IO.Path.GetDirectoryName(location);
-
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\AppData\\Roaming\\PriyemnayaKomissiya";
+            if(!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
             using (StreamWriter sw = new StreamWriter(path + "/config"))
             {
                 sw.Write("Filter: ");
