@@ -1409,6 +1409,37 @@ namespace PriyemnayaKomissiya.View
             }
         }
         /// <summary>
+        /// Изменение формы обучения
+        /// </summary>
+        private void AddEditFormobrazovanie_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (addEditFormobrazovanie.SelectedItem == null) return;
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                SqlCommand command = new SqlCommand("Get_PlanPriemaID", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                command.Parameters.AddWithValue("@speciality", addEditFormspecialnost.SelectedItem);
+                command.Parameters.AddWithValue("@formOfEducation", addEditFormobushenie.SelectedItem);
+                command.Parameters.AddWithValue("@financing", addEditFormFinansirovanie.SelectedItem);
+                command.Parameters.AddWithValue("@education", addEditFormobrazovanie.SelectedItem);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    curentPlanPriema = DB.Get_PlanPriemaByID(reader.GetInt32(0));
+                }
+                reader.Close();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Получение плана приема");
+            }
+        }
+        /// <summary>
         /// обработчик корректности заполнения маски
         /// </summary>
         private void MaskedTB_IsComplited(object sender, TextChangedEventArgs e)

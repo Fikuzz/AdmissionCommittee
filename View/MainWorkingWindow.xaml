@@ -474,7 +474,7 @@
                                         </StackPanel>
                                     </StackPanel>
                                     <TextBlock Text="ОБРАЗОВАНИЕ" Margin="10,25,0,10"/>
-                                    <ComboBox SelectedIndex="0" x:Name="addEditFormobrazovanie" Style="{DynamicResource ComboBoxFlatStyle}"/>
+                                    <ComboBox SelectedIndex="0" x:Name="addEditFormobrazovanie" Style="{DynamicResource ComboBoxFlatStyle}" SelectionChanged="AddEditFormobrazovanie_SelectionChanged"/>
                                     <TextBlock Text="НОМЕР ЭКЗАМЕНАЦИОННОГО ЛИСТА" Margin="10,25,0,10"/>
                                     <TextBox x:Name="addEditFormExamList" Style="{DynamicResource TextBox}" TextChanged="ClearError"/>
                                     <TextBlock Text="ФАМИЛИЯ" Margin="10,25,0,10"/>
